@@ -22,6 +22,13 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
+$tabs-md-tab-icon-color:            #CECECE;
+$tabs-md-tab-icon-color-active:     #FFFFFF;
+$tabs-md-tab-text-color:            #CECECE;
+$tabs-md-tab-text-color-active:     #FFFFFF;
+$background-color:                  #303030;
+$tabs-background:                   #212121;
+$text-color:                        #FFFFFF;
 
 
 
@@ -34,12 +41,11 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  primary:      #00755c,
+  dark:         #222222,
+  white:        #FFFFFF
 );
+
 
 
 // App iOS Variables
