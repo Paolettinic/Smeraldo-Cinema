@@ -1,0 +1,92 @@
+<ion-header>
+
+    <ion-toolbar color="dark">
+        <ion-segment color="secondary" [(ngModel)]="film">
+            <ion-segment-button value="oggi">
+                OGGI
+            </ion-segment-button>
+            <ion-segment-button value="settimana">
+                SETTIMANA
+            </ion-segment-button>
+            <ion-segment-button value="inarrivo">
+                IN ARRIVO
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <div [ngSwitch]="film">
+        <ion-list *ngSwitchCase="'oggi'">
+            <ion-list no-lines>
+
+                <ion-item (click)="prova()">
+                    <ion-thumbnail item-start>
+                        <img src="http://www.thereelbits.com/wp-content/uploads/2011/05/titanic-poster.jpg" class="img_film">
+                    </ion-thumbnail>
+                    <h2>My Neighbor Totoro</h2>
+                    <p>Regia: Hayao Miyazaki</p>
+                    <p>Genere: animazione</p>
+                    <p>Attori: Totoro</p>
+                    <p>Durata: 123</p>
+                    <p>Prezzo: 5€</p>
+                    <div item-end>
+                        <p>15:00</p>
+                        <p>17:00</p>
+                        <p>19:00</p>
+                        <p>21:00</p>
+                    </div>
+                </ion-item>
+
+            </ion-list>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'settimana'">
+            <ion-list no-lines>
+                
+                <ion-item>
+                    <ion-thumbnail item-start>
+                        <img src="http://www.thereelbits.com/wp-content/uploads/2011/05/titanic-poster.jpg" class="img_film">
+                    </ion-thumbnail>
+                    <h2>My Neighbor Totoro</h2>
+                    <p>Regia: Hayao Miyazaki</p>
+                    <p>Genere: animazione</p>
+                    <p>Attori: Totoro</p>
+                    <p>Durata: 123</p>
+                    <p>Prezzo: 5€</p>
+                    <div item-end>
+                        <p>14/07</p>
+                        <p>15/07</p>
+                        <p>16/07</p>
+                        <p>17/07</p>
+                    </div>
+                </ion-item>
+                
+            </ion-list>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'inarrivo'">
+            <ion-list no-lines>
+                
+                <ion-item>
+                    <ion-thumbnail item-start>
+                        <img src="http://www.thereelbits.com/wp-content/uploads/2011/05/titanic-poster.jpg" class="img_film">
+                    </ion-thumbnail>
+                    <h2>My Neighbor Totoro</h2>
+                    <p>Regia: Hayao Miyazaki</p>
+                    <p>Genere: animazione</p>
+                    <p>Attori: Totoro</p>
+                    <p>Durata: 123</p>
+                    <p>Prezzo: 5€</p>
+                    <div item-end>
+                        <p>Dal 14/07</p>
+                    </div>
+                </ion-item>
+                
+            </ion-list>
+        </ion-list>
+    </div>
+
+</ion-content>

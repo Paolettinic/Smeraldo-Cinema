@@ -1,20 +1,20 @@
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/BookingRepository.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/web/PurchaseController.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/SmeraldoCinemaService.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/SeatRepository.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/SmeraldoCinemaServiceImpl.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/TheaterRepository.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Screening.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/web/BookingController.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/PurchaseRepository.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Purchase.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Theater.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Seat.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/FilmRepository.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/ScreeningRepository.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/Application.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/web/FilmController.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Booking.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/web/ScreeningController.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Film.java
-/Users/Mario/Desktop/smeraldocinema/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/Utility.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/web/PurchaseController.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Purchase.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/SeatRepository.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/SmeraldoCinemaService.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/web/BookingController.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/web/FilmController.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Film.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/web/ScreeningController.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Booking.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/TheaterRepository.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Screening.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/PurchaseRepository.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/SmeraldoCinemaServiceImpl.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/ScreeningRepository.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/Application.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/Utility.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/FilmRepository.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Seat.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/domain/Theater.java
+/Users/Mario/Desktop/Applicazioni Per Dispositivi Mobili/Smeraldo-Cinema/Implementation/smeraldocinema-server/src/main/java/it/univaq/disim/mobile/smeraldocinema/business/impl/BookingRepository.java
