@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar color='dark'>
+        <ion-title>Metodi di pagamento</ion-title>
+        <ion-buttons end>
+            <button  [navPush]="pushPage" ion-button icon-only>
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list no-lines radio-group>
+
+              <ion-item>
+            <ion-label color='white'>Paypal: alicela95@hotmail.it</ion-label>
+            <ion-radio value="cord"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Mastercard: xxx-1234</ion-label>
+            <ion-radio value="duesenberg"></ion-radio>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-fab right bottom>
+        <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+            <button ion-fab color="primary" (click)='showPromptCC()'><ion-icon name="card"></ion-icon><ion-label>Carta di credito</ion-label></button>
+            <button ion-fab color="primary" (click)='showPromptPP()'>P<ion-label>Paypal</ion-label></button>
+        </ion-fab-list>
+    </ion-fab>
+
+</ion-content>
