@@ -22,7 +22,7 @@
         <ion-list *ngSwitchCase="'oggi'">
             <ion-list no-lines>
 
-                <ion-item (click)="prova()">
+                <ion-item [navPush]="pushPage">
                     <ion-thumbnail item-start>
                         <img src="http://www.thereelbits.com/wp-content/uploads/2011/05/titanic-poster.jpg" class="img_film">
                     </ion-thumbnail>
