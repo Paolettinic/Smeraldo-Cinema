@@ -1,0 +1,83 @@
+<ion-header>
+
+    <ion-toolbar color="dark">
+        <ion-segment color="secondary" [(ngModel)]="info">
+            <ion-segment-button value="biglietti">
+                BIGLIETTI
+            </ion-segment-button>
+            <ion-segment-button value="chisiamo">
+                CHI SIAMO
+            </ion-segment-button>
+            <ion-segment-button value="servizi">
+                SERVIZI
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <div [ngSwitch]="info">
+        <div text-justify *ngSwitchCase="'biglietti'">
+             <ion-card color='light_dark'>
+                <ion-card-content>
+                    <p><strong>Proiezioni in 2D</strong><br>Intero <strong>7,50 €</strong> - Ridotto <strong>5 €</strong><br><br><strong>Proiezioni in 3D</strong><br>Intero <strong>8,50 €</strong> - Ridotto <strong>6 €</strong><br><br><strong>PROMOZIONI SETTIMANALI</strong><br><em>Martedì cinema</em><br>Proiezioni in 2D <strong>biglietto unico 5 €</strong><br>Proiezioni in 3D <strong>biglietto unico 6 €</strong><br><br><em>Ultimo giorno di programmazione</em><br>Proiezioni in 2D <strong>biglietto unico 3 €</strong><br>Proiezioni in 3D <strong>biglietto unico 4 €</strong><br><br><strong>I POSTI SONO NUMERATI</strong><br>Le riduzioni vanno chieste prima dell'emissione del biglietto<br><br><strong>Categorie di riduzione</strong><br>Bambini fino ai 12 anni Over 60, invalidi ed accompagnatori, forze dell’ordine, militari e vigili del fuoco, donatori di sangue*, studenti universitari ed Erasmus*, studenti con carta "io studio”*<br><em><br>*eccetto giorni festivi / prefestivi</em></p>
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'chisiamo'">
+            <img src="http://smeraldocinema.it/images/logoSmeraldoLeft.png">
+            <div text-justify>
+                <ion-card color='light_dark'>
+                    <ion-card-content>
+                        <p>Il nuovo Cinema Smeraldo si sviluppa su due livelli. Gli spazi sono stati completamente ridisegnati, sfruttando i volumi in precedenza non utilizzati ed è stato possibile aumentare del 30% la capienza complessiva delle sette sale che sarà di oltre 700 posti.</p>
+                        <p><b>Telefono: </b>0861 415778<br><b>Indirizzo: </b>Via Maestri del Lavoro - 64100 Teramo<br><b>Email: </b>info@multisalasmeraldo.com</p>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+            <ion-card color='light_dark'>
+                <img src="https://allinallnews.com/wp-content/uploads/2015/05/Google-Maps.png">
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'servizi'">
+            <div text-justify>
+                <ion-card color='light_dark'>
+                    <ion-card-header>
+                        <b>DOLBY ATMOS</b>
+                    </ion-card-header>
+                    <ion-card-content>
+                        Per la prima volta in Abruzzo l’innovativo sistema Dolby Atmos ti trascinerà all’interno della storia, avvolgendoti con un flusso di suoni di realismo mozzafiato. Vivi da noi questa straordinaria esperienza audio.<br>Il Dolby Atmos è una tecnologia che rende il suono capace di muoversi ovunque all’interno della sala, raggiungendo lo spettatore non solo lateralmente, ma anche dall’alto. Ciò permette di isolare singolarmente ciascun suono proveniente dal set, conferendogli così realismo e chiarezza mai ottenuti prima.
+                    </ion-card-content>
+                </ion-card>
+                <ion-card color='light_dark'>
+                    <ion-card-header>
+                        <b>LOVE BOX</b>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <p>Nelle ultime file delle nostre sale troverai comode poltrone appositamente pensate per le coppie, che renderanno la visione del film ancora più emozionante.</p>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card color='light_dark'>
+                    <ion-card-header>
+                        <b>HAPPY WEEKEND</b>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <p>Abbina da noi la nuova esperienza del cinema su divani esclusivi accompagnata da ottimi aperitivi serviti direttamente in sala.<br>Questa sala ti accoglierà su speciali divani disegnati esclusivamente per noi che ti doneranno comfort, facendoti sentire come a casa. Nel fine settimana inoltre potrai allietare la tua visione godendoti sfiziosi e gustosi aperitivi.</p>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card color='light_dark'>
+                    <ion-card-header>
+                        <b>PRIVATE ROOM</b>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <p>Questa è la sala realizzata pensando a te. Qui avrai la possibilità di guardare il tuo film preferito in DVD o Blu-ray e festeggiare con i tuoi amici in un'area appositamente riservata per te, con menù a prezzi scontati! In alternativa scegliere il film che preferisci tra quelli in programmazione nelle nostre sale e poi festeggiare il compleanno nella private room.<br>Oppure potrai festeggiare il tuo compleanno con i tuoi amici (minimo 8 bambini) direttamente in sala, scegliendo il film che preferisci tra quelli in programmazione. Ti saranno inoltre offerti un pop corn piccolo e una bevanda piccola, il tutto al prezzo di € 8,00. È richiesto un accompagnatore per ogni gruppo di 8 bambini, che avrà diritto al biglietto ridotto di € 5,00.</p>
+                    </ion-card-content>
+                </ion-card>
+            </div>    
+        </div> 
+    </div>
+
+</ion-content>
