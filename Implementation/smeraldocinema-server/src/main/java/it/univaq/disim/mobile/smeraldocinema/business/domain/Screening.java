@@ -1,7 +1,8 @@
 package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.AssociationOverride;
@@ -27,8 +28,9 @@ public class Screening implements java.io.Serializable {
     @Column(name = "screening_id")
     private Long id;
     
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "day", nullable = false)
-    private LocalDate day;
+    private Date day;
 
     @Column(name = "hour", nullable = false)
     private String hour;
@@ -52,7 +54,7 @@ public class Screening implements java.io.Serializable {
     public Screening() {
     }
     
-    public Screening(Long id, LocalDate day, String hour, Theater theater, Film film) {
+    public Screening(Long id, Date day, String hour, Theater theater, Film film) {
         this.id = id;
         this.day = day;
         this.hour = hour;
@@ -83,11 +85,11 @@ public class Screening implements java.io.Serializable {
     public void setFilm(Film film){
         this.film = film;
     }
-    public LocalDate getDay() {
+    public Date getDay() {
         return day;
     }
 
-    public void setDay(LocalDate day) {
+    public void setDay(Date day) {
         this.day = day;
     }
 

@@ -1,6 +1,8 @@
 package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -48,7 +50,8 @@ public class Film implements java.io.Serializable {
     private String trailer;
 
     @Column(name = "release_date", nullable = false)
-    private LocalDate releaseDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date releaseDate;
 
     @Column(name = "price", nullable = false)
     private float price;
@@ -62,7 +65,7 @@ public class Film implements java.io.Serializable {
     public Film() {
     }
 
-    public Film(Long id, String title, String director, String actor, String country, int runningTime, String synopsis, String poster, String recognition, String trailer, LocalDate releaseDate, float price, boolean sale) {
+    public Film(Long id, String title, String director, String actor, String country, int runningTime, String synopsis, String poster, String recognition, String trailer, Date releaseDate, float price, boolean sale) {
         this.id = id;
         this.title = title;
         this.director = director;
@@ -78,7 +81,7 @@ public class Film implements java.io.Serializable {
         this.sale = sale;
     }
 
-    public Film(Long id, String title, String director, String actor, String country, int runningTime, String synopsis, String poster, String recognition, String trailer, LocalDate releaseDate, float price, boolean sale, Set<Screening> screenings) {
+    public Film(Long id, String title, String director, String actor, String country, int runningTime, String synopsis, String poster, String recognition, String trailer, Date releaseDate, float price, boolean sale, Set<Screening> screenings) {
         this.id = id;
         this.title = title;
         this.director = director;
@@ -175,11 +178,11 @@ public class Film implements java.io.Serializable {
         this.trailer = trailer;
     }
 
-    public LocalDate getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(LocalDate release_date) {
+    public void setReleaseDate(Date release_date) {
         this.releaseDate = release_date;
     }
 

@@ -1,7 +1,7 @@
 package it.univaq.disim.mobile.smeraldocinema.business.impl;
 
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Film;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -19,20 +19,20 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
      *   @param today giorno corrente
      *   @return la lista dei film con Date today
     */
-    List<Film> findByReleaseDate (LocalDate today);
+    List<Film> findByReleaseDate (Date today);
     
     /**
      *   Restituisce la lista dei film con data precedente a quella di oggi
      *   @param today giorno corrente
      *   @return la lista dei film
     */
-    List<Film> findByReleaseDateBefore (LocalDate today);
+    List<Film> findByReleaseDateBefore (Date today);
     
     /**
      *   Restituisce la lista dei film in arrivo
      *   @param today giorno corrente
      *   @return la lista dei film in arrivo
     */
-    List<Film> findByReleaseDateAfter (LocalDate today);
+    List<Film> findByReleaseDateAfter (Date today);
     
 }

@@ -5,7 +5,7 @@ import it.univaq.disim.mobile.smeraldocinema.business.domain.Booking;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Film;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Purchase;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Screening;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,19 +36,22 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     
     @Override
     public List<Film> findAllDailyFilms() {
-        return filmRepository.findByReleaseDate (LocalDate.now());
+        Date now = new Date();
+        return filmRepository.findByReleaseDate (now);
     }
 
     @Override
     public List<Film> findAllWeeklyFilms() {
-        return filmRepository.findByReleaseDateBefore(LocalDate.now());
+        Date now = new Date();
+        return filmRepository.findByReleaseDateBefore(now);
     }
 
     @Override
     public List<Film> findAllComingSoonFilms() {
-        return filmRepository.findByReleaseDateAfter(LocalDate.now());
+        Date now = new Date();
+        return filmRepository.findByReleaseDateAfter(now);
     }
-
+ 
     @Override
     public Film findFilm(Long id) {
         return filmRepository.findById(id);
@@ -96,18 +99,20 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
 
     @Override
     public void cleanBookings() {
+        Date now = new Date();
         List<Booking> bookings = bookingRepository.findAll();
         for (Booking booking : bookings) {
-            if (booking.getId().getScreening().getDay().isBefore(LocalDate.now()))
+            // if (booking.getId().getScreening().getDay().isBefore(now))
               bookingRepository.delete(booking);
         } 
     }
 
     @Override
     public void cleanPurchases() {
+        Date now = new Date();
         List<Purchase> purchases = purchaseRepository.findAll();
         for (Purchase purchase : purchases) {
-            if(purchase.getId().getScreening().getDay().isBefore(LocalDate.now()))
+            // if(purchase.getId().getScreening().getDay().isBefore(now))
                 purchaseRepository.delete(purchase);  
         }
     }
