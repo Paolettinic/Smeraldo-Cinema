@@ -2,8 +2,10 @@ package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,6 +29,9 @@ public class Film implements java.io.Serializable {
 
     @Column(name = "director", nullable = false)
     private String director;
+    
+    @Column(name = "genre", nullable = false)
+    private String genre;
 
     @Column(name = "actor", nullable = true)
     private String actor;
@@ -60,15 +65,16 @@ public class Film implements java.io.Serializable {
     private boolean sale;
     
     @OneToMany(mappedBy = "film")
-    private Set<Screening> screenings = new HashSet<Screening>();
+    private List<Screening> screenings = new ArrayList();
 
     public Film() {
     }
 
-    public Film(Long id, String title, String director, String actor, String country, int runningTime, String synopsis, String poster, String recognition, String trailer, Date releaseDate, float price, boolean sale) {
+    public Film(Long id, String title, String director, String genre, String actor, String country, int runningTime, String synopsis, String poster, String recognition, String trailer, Date releaseDate, float price, boolean sale) {
         this.id = id;
         this.title = title;
         this.director = director;
+        this.genre = genre;
         this.actor = actor;
         this.country = country;
         this.runningTime = runningTime;
@@ -81,10 +87,11 @@ public class Film implements java.io.Serializable {
         this.sale = sale;
     }
 
-    public Film(Long id, String title, String director, String actor, String country, int runningTime, String synopsis, String poster, String recognition, String trailer, Date releaseDate, float price, boolean sale, Set<Screening> screenings) {
+    public Film(Long id, String title, String director, String genre, String actor, String country, int runningTime, String synopsis, String poster, String recognition, String trailer, Date releaseDate, float price, boolean sale, List<Screening> screenings) {
         this.id = id;
         this.title = title;
         this.director = director;
+        this.genre = genre;
         this.actor = actor;
         this.country = country;
         this.runningTime = runningTime;
@@ -120,6 +127,14 @@ public class Film implements java.io.Serializable {
 
     public void setDirector(String director) {
         this.director = director;
+    }
+    
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public String getActor() {
@@ -202,11 +217,11 @@ public class Film implements java.io.Serializable {
         this.sale = sale;
     }
 
-    public Set<Screening> getScreenings() {
+    public List<Screening> getScreenings() {
         return this.screenings;
     }
 
-    public void setScreenings(Set<Screening> screenings) {
+    public void setScreenings(List<Screening> screenings) {
         this.screenings = screenings;
     }
 }

@@ -28,8 +28,8 @@
                     </ion-thumbnail>
                     <h2 light_grey>{{dailyfilm.title}}</h2>
                     <p class="detail">Regia: {{dailyfilm.director}}</p>
-                    <p class="detail">Genere: DA INSERIRE</p>
-                    <p class="detail">Attori: {{dailyfilm.actor}}</p>
+                    <p class="detail">Genere: {{dailyfilm.genre}}</p>
+                    <p *ngIf="dailyfilm.actor !=  '' " class="detail">Attori: {{dailyfilm.actor}}</p>
                     <p class="detail">Durata: {{dailyfilm.runningTime}} minuti</p>
                     <p class="detail">Prezzo: €{{dailyfilm.price}}</p>
                     <div item-end>
@@ -49,8 +49,8 @@
                     </ion-thumbnail>
                     <h2 light_grey>{{weeklyfilm.title}}</h2>
                     <p class="detail">Regia: {{weeklyfilm.director}}</p>
-                    <p class="detail">Genere: DA INSERIRE</p>
-                    <p class="detail">Attori: {{weeklyfilm.actor}}</p>
+                    <p class="detail">Genere: {{weeklyfilm.genre}}</p>
+                    <p *ngIf="weeklyfilm.actor !=  '' " class="detail">Attori: {{weeklyfilm.actor}}</p>
                     <p class="detail">Durata: {{weeklyfilm.runningTime}} minuti</p>
                     <p class="detail">Prezzo: €{{weeklyfilm.price}}</p>
                     <div item-end>
@@ -73,8 +73,8 @@
                     </ion-thumbnail>
                     <h2 light_grey>{{comingsoonfilm.title}}</h2>
                     <p class="detail">Regia: {{comingsoonfilm.director}}</p>
-                    <p class="detail">Genere: DA INSERIRE</p>
-                    <p class="detail">Attori: {{comingsoonfilm.actor}}</p>
+                    <p class="detail">Genere: {{comingsoon.genre}}</p>
+                    <p *ngIf="comingsoonfilm.actor !=  '' " class="detail">Attori: {{comingsoonfilm.actor}}</p>
                     <p class="detail">Durata: {{comingsoonfilm.runningTime}} minuti</p>
                     <p class="detail">Prezzo: €{{comingsoonfilm.price}}</p>
                     <div item-end>

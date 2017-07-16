@@ -1,6 +1,8 @@
 package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,10 +30,10 @@ public class Seat implements java.io.Serializable {
     private String row;
 
     @OneToMany(mappedBy = "id.seat")
-    private Set<Booking> bookings = new HashSet<Booking>();
+    private List<Booking> bookings = new ArrayList();
 
     @OneToMany(mappedBy = "id.seat")
-    private Set<Purchase> purchases = new HashSet<Purchase>();
+    private List<Purchase> purchases = new ArrayList();
 
     @ManyToOne
     @JoinColumn(name = "theater_id", nullable = false)
@@ -47,7 +49,7 @@ public class Seat implements java.io.Serializable {
         this.theater = theater;
     }
 
-    public Seat(Long id, int number, String row, Theater theater, Set<Booking> bookings, Set<Purchase> purchases) {
+    public Seat(Long id, int number, String row, Theater theater, List<Booking> bookings, List<Purchase> purchases) {
         this.id = id;
         this.number = number;
         this.row = row;
@@ -88,19 +90,19 @@ public class Seat implements java.io.Serializable {
         this.theater = theater;
     }
 
-    public Set<Booking> getBookings() {
+    public List<Booking> getBookings() {
         return this.bookings;
     }
 
-    public void setBookings(Set<Booking> bookings) {
+    public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
 
-    public Set<Purchase> getPurchases() {
+    public List<Purchase> getPurchases() {
         return this.purchases;
     }
 
-    public void setPurchases(Set<Purchase> purchases) {
+    public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
     }
 }

@@ -38,6 +38,10 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     public List<Film> findAllDailyFilms() {
         Date now = new Date();
         return filmRepository.findByReleaseDateBefore(now);
+        // for (Film film : films){
+        //     List<Screening> screenings = film.getScreenings();
+        // }
+        
     }
 
     @Override

@@ -2,8 +2,10 @@ package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
@@ -47,11 +49,11 @@ public class Screening implements java.io.Serializable {
     
     @JsonIgnore
     @OneToMany(mappedBy = "id.screening")
-    private Set<Booking> bookings = new HashSet<Booking>();
+    private List<Booking> bookings = new ArrayList();
 
     @JsonIgnore
     @OneToMany(mappedBy = "id.screening")
-    private Set<Purchase> purchases = new HashSet<Purchase>();
+    private List<Purchase> purchases = new ArrayList();
     
     public Screening() {
     }
@@ -103,19 +105,19 @@ public class Screening implements java.io.Serializable {
         this.hour = hour;
     }
 
-    public Set<Booking> getBookings() {
+    public List<Booking> getBookings() {
         return this.bookings;
     }
 
-    public void setBookings(Set<Booking> bookings) {
+    public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
 
-    public Set<Purchase> getPurchases() {
+    public List<Purchase> getPurchases() {
         return this.purchases;
     }
 
-    public void setPurchases(Set<Purchase> purchases) {
+    public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
     }
 }

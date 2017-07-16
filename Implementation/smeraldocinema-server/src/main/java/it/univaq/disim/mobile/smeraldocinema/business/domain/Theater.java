@@ -1,6 +1,8 @@
 package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,10 +28,10 @@ public class Theater implements java.io.Serializable {
     private int capacity;
 
     @OneToMany(mappedBy = "theater")
-    private Set<Screening> screenings = new HashSet<Screening>();
+    private List<Screening> screenings = new ArrayList();
 
     @OneToMany(mappedBy = "theater")
-    private Set<Seat> seats = new HashSet<Seat>();
+    private List<Seat> seats = new ArrayList();
 
     public Theater() {
     }
@@ -40,7 +42,7 @@ public class Theater implements java.io.Serializable {
         this.capacity = capacity;
     }
 
-    public Theater(Long id, int number, int capacity, Set<Screening> screenings) {
+    public Theater(Long id, int number, int capacity, List<Screening> screenings) {
         this.id = id;
         this.number = number;
         this.capacity = capacity;
@@ -71,19 +73,19 @@ public class Theater implements java.io.Serializable {
         this.capacity = capacity;
     }
 
-    public Set<Screening> getScreenings() {
+    public List<Screening> getScreenings() {
         return this.screenings;
     }
 
-    public void setScreenings(Set<Screening> screenings) {
+    public void setScreenings(List<Screening> screenings) {
         this.screenings = screenings;
     }
 
-    public Set<Seat> getSeats() {
+    public List<Seat> getSeats() {
         return this.seats;
     }
 
-    public void setSeats(Set<Seat> seats) {
+    public void setSeats(List<Seat> seats) {
         this.seats = seats;
     }
 }

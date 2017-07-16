@@ -5,6 +5,7 @@ export class Film {
     public id: number = -1;
     public title: string = "";
     public director: string = "";
+    public genre: string = "";
     public actor: string = "";
     public country: string = "";
     public runningTime: number = -1;
@@ -26,6 +27,7 @@ export class Film {
             this.id = (typeof obj.id === "number") ? obj.id : this.id;
             this.title = obj.title || this.title;
             this.director = obj.director || this.director;
+            this.genre = obj.genre || this.genre;
             this.actor = obj.actor || this.actor;
             this.country = obj.country || this.country;
             this.runningTime = (typeof obj.runningTime === "number") ? obj.runningTime : this.runningTime;

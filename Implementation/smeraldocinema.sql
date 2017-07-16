@@ -2,6 +2,7 @@ CREATE TABLE `films` (
 	`film_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`title` varchar(255) NOT NULL,
 	`director` varchar(225) NOT NULL,
+	`genre` varchar(225) NOT NULL,
 	`actor` varchar(225),
 	`country` varchar(225) NOT NULL,
 	`running_time` int(3) NOT NULL,
