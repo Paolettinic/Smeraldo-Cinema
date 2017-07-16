@@ -15,13 +15,6 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
     Film findById (Long film_id);
     
     /**
-     *   Restituisce la lista dei film con data uguale a oggi
-     *   @param today giorno corrente
-     *   @return la lista dei film con Date today
-    */
-    List<Film> findByReleaseDate (Date today);
-    
-    /**
      *   Restituisce la lista dei film con data precedente a quella di oggi
      *   @param today giorno corrente
      *   @return la lista dei film

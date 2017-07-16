@@ -37,7 +37,7 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     @Override
     public List<Film> findAllDailyFilms() {
         Date now = new Date();
-        return filmRepository.findByReleaseDate (now);
+        return filmRepository.findByReleaseDateBefore(now);
     }
 
     @Override

@@ -16,27 +16,24 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
     <div [ngSwitch]="film">
         <ion-list *ngSwitchCase="'oggi'">
             <ion-list no-lines>
 
-                <ion-item [navPush]="pushPage">
+                <ion-item [navPush]="pushPage" *ngFor="let dailyfilm of dailyfilms">
                     <ion-thumbnail item-start>
-                        <img src="http://www.studioghibli.it/wp-content/uploads/2014/03/47103.jpg" class="img_film">
+                        <img src="{{dailyfilm.poster}}" class="img_film">
                     </ion-thumbnail>
-                    <h2 light_grey>Il mio vicino Totoro</h2>
-                    <p class="detail">Regia: Hayao Miyazaki</p>
-                    <p class="detail">Genere: animazione</p>
-                    <p class="detail">Attori: Totoro</p>
-                    <p class="detail">Durata: 86</p>
-                    <p class="detail">Prezzo: 5€</p>
+                    <h2 light_grey>{{dailyfilm.title}}</h2>
+                    <p class="detail">Regia: {{dailyfilm.director}}</p>
+                    <p class="detail">Genere: DA INSERIRE</p>
+                    <p class="detail">Attori: {{dailyfilm.actor}}</p>
+                    <p class="detail">Durata: {{dailyfilm.runningTime}} minuti</p>
+                    <p class="detail">Prezzo: €{{dailyfilm.price}}</p>
                     <div item-end>
-                        <p class="detail">15:00</p>
-                        <p class="detail">17:00</p>
-                        <p class="detail">19:00</p>
-                        <p class="detail">21:00</p>
+                        <p *ngFor="let screening of dailyfilm.screenings" class="detail">{{screening.hour}}</p>
                     </div>
                 </ion-item>
 
@@ -46,21 +43,21 @@
         <ion-list *ngSwitchCase="'settimana'">
             <ion-list no-lines>
 
-                <ion-item>
+                <ion-item [navPush]="pushPage" *ngFor="let weeklyfilm of weeklyfilms">
                     <ion-thumbnail item-start>
-                        <img src="http://www.studioghibli.it/wp-content/uploads/2014/03/47103.jpg" class="img_film">
+                        <img src="{{weeklyfilm.poster}}" class="img_film">
                     </ion-thumbnail>
-                    <h2 light_grey>Il mio vicino Totoro</h2>
-                    <p class="detail">Regia: Hayao Miyazaki</p>
-                    <p class="detail">Genere: animazione</p>
-                    <p class="detail">Attori: Totoro</p>
-                    <p class="detail">Durata: 86</p>
-                    <p class="detail">Prezzo: 5€</p>
+                    <h2 light_grey>{{weeklyfilm.title}}</h2>
+                    <p class="detail">Regia: {{weeklyfilm.director}}</p>
+                    <p class="detail">Genere: DA INSERIRE</p>
+                    <p class="detail">Attori: {{weeklyfilm.actor}}</p>
+                    <p class="detail">Durata: {{weeklyfilm.runningTime}} minuti</p>
+                    <p class="detail">Prezzo: €{{weeklyfilm.price}}</p>
                     <div item-end>
-                        <p class="detail">14/07</p>
-                        <p class="detail">15/07</p>
-                        <p class="detail">16/07</p>
-                        <p class="detail">17/07</p>
+                        <p class="detail">01/01</p>
+                        <p class="detail">01/02</p>
+                        <p class="detail">01/03</p>
+                        <p class="detail">01/04</p>
                     </div>
                 </ion-item>
 
@@ -70,18 +67,18 @@
         <ion-list *ngSwitchCase="'inarrivo'">
             <ion-list no-lines>
 
-                <ion-item>
+                <ion-item [navPush]="pushPage" *ngFor="let comingsoonfilm of comingsoonfilms">
                     <ion-thumbnail item-start>
-                        <img src="http://www.studioghibli.it/wp-content/uploads/2014/03/47103.jpg" class="img_film">
+                        <img src="{{comingsoonfilm.poster}}" class="img_film">
                     </ion-thumbnail>
-                    <h2 light_grey>Il mio vicino Totoro</h2>
-                    <p class="detail">Regia: Hayao Miyazaki</p>
-                    <p class="detail">Genere: animazione</p>
-                    <p class="detail">Attori: Totoro</p>
-                    <p class="detail">Durata: 86</p>
-                    <p class="detail">Prezzo: 5€</p>
+                    <h2 light_grey>{{comingsoonfilm.title}}</h2>
+                    <p class="detail">Regia: {{comingsoonfilm.director}}</p>
+                    <p class="detail">Genere: DA INSERIRE</p>
+                    <p class="detail">Attori: {{comingsoonfilm.actor}}</p>
+                    <p class="detail">Durata: {{comingsoonfilm.runningTime}} minuti</p>
+                    <p class="detail">Prezzo: €{{comingsoonfilm.price}}</p>
                     <div item-end>
-                        <p class="detail">Dal 14/07</p>
+                        <p class="detail">Dal {{comingsoonfilm.releaseTime}}</p>
                     </div>
                 </ion-item>
 

@@ -16,7 +16,7 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
     <div [ngSwitch]="info">
         <div text-justify *ngSwitchCase="'biglietti'">
@@ -28,7 +28,9 @@
         </div>
 
         <div *ngSwitchCase="'chisiamo'">
-            <img src="http://smeraldocinema.it/images/logoSmeraldoLeft.png">
+            <div padding>
+                <img src="http://smeraldocinema.it/images/logoSmeraldoLeft.png">
+            </div>
             <div text-justify>
                 <ion-card color='light_dark'>
                     <ion-card-content>

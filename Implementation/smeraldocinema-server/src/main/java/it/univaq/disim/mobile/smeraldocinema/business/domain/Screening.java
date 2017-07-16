@@ -35,10 +35,12 @@ public class Screening implements java.io.Serializable {
     @Column(name = "hour", nullable = false)
     private String hour;
     
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;
     
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "film_id", nullable = false)
     private Film film;

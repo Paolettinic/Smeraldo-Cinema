@@ -58,7 +58,7 @@ public class Film implements java.io.Serializable {
 
     @Column(name = "sale", nullable = false)
     private boolean sale;
-
+    
     @OneToMany(mappedBy = "film")
     private Set<Screening> screenings = new HashSet<Screening>();
 
