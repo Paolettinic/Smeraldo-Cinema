@@ -6,6 +6,7 @@ import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -53,7 +54,8 @@ public class Purchase implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "purchase_id")
-    private ScreeningSeatId id;
+    @EmbeddedId 
+    private ScreeningSeatId id = new ScreeningSeatId();
 
     @Column(name = "mail", nullable = false)
     private String mail;
@@ -64,8 +66,9 @@ public class Purchase implements java.io.Serializable {
     public Purchase() {
     }
 
-    public Purchase(ScreeningSeatId id, String mail, String qr_code) {
-        this.id = id;
+    public Purchase(Screening screening, Seat seat, String mail, String qr_code) {
+        this.setScreening(screening);
+	this.setSeat(seat);
         this.mail = mail;
         this.qr_code = qr_code;
     }
@@ -93,5 +96,12 @@ public class Purchase implements java.io.Serializable {
     public void setQr_Code(String qr_code) {
         this.qr_code = qr_code;
     }
-
+    
+    public void setScreening(Screening s){
+      getId().setScreening(s);
+    }
+    
+    public void setSeat(Seat s){
+      getId().setSeat(s);
+    }
 }

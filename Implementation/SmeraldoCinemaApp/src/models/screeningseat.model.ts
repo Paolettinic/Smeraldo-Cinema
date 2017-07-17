@@ -1,3 +1,6 @@
+import { Seat } from '../models/seat.model';
+import { Screening } from '../models/screening.model';
+
 export class ScreeningSeat{
   
   seat : Seat = null;

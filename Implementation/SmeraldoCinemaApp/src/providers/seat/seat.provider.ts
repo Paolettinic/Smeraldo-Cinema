@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Seat } from '../../models/seat.model';
+import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-/*
-  Generated class for the SeatProvider provider.
-	 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
+
+//Models
+import { Seat } from '../../models/seat.model';
+
 @Injectable()
 export class SeatProvider {
 
-  private _seats: Array<Seat> = null;
-
-  constructor(private _http: Http, private _screeningid: number) {
+  private _purchasedseats: Array<Seat> = null;
+  private _bookedseats: Array<Seat> = null;
+  private _screening: number = 1;
+  constructor(private _http: Http) {
     console.log('Hello SeatProvider Provider');
   }
 
@@ -22,26 +20,45 @@ export class SeatProvider {
     
     return new Promise((resolve) => {
       
-      if (this._seats === null) {
-	this._seats = [];
-	this._http.get('api/purchase/'+this._screeningid).toPromise()
+      if (this._purchasedseats === null) {
+	this._purchasedseats = [];
+	this._http.get('api/purchases/'+this._screening).toPromise()
 	  .then((res: Response) => {
-	    const json = res.json() as Array<Seat>;
-	    if (json.result) {
-	      const seats = json.data;
-	      for (let seat of _seats) {
-		this._seats.push(new Seat(seat));
-	      }
-	      resolve(this._seats);
-	    } else {
-	      resolve(this._seats);
-	    }
+	    /*const seats = res.json() as Array<Seat>;
+	    for (let seat of seats) {
+	      this._purchasedseats.push(new Seat(seat));
+	    }*/
+	    this._purchasedseats = res.json();
+	    console.log(this._purchasedseats);
+	    resolve(this._purchasedseats);
 	  })
-
-	  .catch(() => resolve(this._seats));
+	  .catch(() => resolve(this._purchasedseats));
       } else {
-	resolve(this._seats);
+	resolve(this._purchasedseats);
       }
     });
+  }
+  
+  getBookedSeats(): Promise < Array<Seat> > {
+    
+    return new Promise((resolve) => {
+      
+      if (this._bookedseats === null) {
+	this._bookedseats = [];
+	this._http.get('api/purchases/'+this._screening).toPromise()
+	  .then((res: Response) => {
+	    /*const seats = res.json() as Array<Seat>;
+	    for (let seat of seats) {
+	      this._bookedseats.push(new Seat(seat));
+	    }*/
+	    this._bookedseats = res.json();
+	    resolve(this._bookedseats);
+	  })
+	  .catch(() => resolve(this._bookedseats));
+      } else {
+	resolve(this._bookedseats);
+      }
+    });
+
   }
 }

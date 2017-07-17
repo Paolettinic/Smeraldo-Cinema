@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { SeatProvider} from '../../providers/seat/seat.provider'
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Seat } from '../../models/seat.model';
 
 /**
  * Generated class for the SeatsPage page.
@@ -14,14 +16,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SeatsPage {
   
-  days : string[] = ['11/03','12/03','13/03','14/03','11/03','12/03','13/03'];
-  times : string[] = ['8:30','11:30','13:30'];
+  seats :  Array<string> = [];
+  days : string[] = [];
+  times : string[] = [];
+  
+  purchased : Seat[] = [];
+  booked: Seat[] = [];
+  
   sala : number = 1;
   cols : number[] = [1,2,3,4,5,6,7,8,9,10,11,12];
   rows : string[] = ['A','B','C','D','E','F','G','H','I','J','K','L'];
-  seats :  Array<string> = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-      
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sSeats: SeatProvider) {
+      this.sSeats.getPurchasedSeats().then(purchasedSeats => {this.purchased = purchasedSeats});
+      this.sSeats.getBookedSeats().then(bookedSeats => {this.booked = bookedSeats});
   }
   
   selectSeat(r,c){

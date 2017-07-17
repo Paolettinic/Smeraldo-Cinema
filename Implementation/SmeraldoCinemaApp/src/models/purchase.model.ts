@@ -1,4 +1,5 @@
-import { ScreeningSeat } from 'screeningseat.model';
+import { ScreeningSeat } from '../models/screeningseat.model';
+
 
 export class Purchase{
   

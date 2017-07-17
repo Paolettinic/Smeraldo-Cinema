@@ -17,6 +17,6 @@ public class Utility {
     }
 
     public static String generateQrCode() {
-        return null;
+        return "trolol";
     }
 }
