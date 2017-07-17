@@ -22,7 +22,7 @@
         <ion-list *ngSwitchCase="'oggi'">
             <ion-list no-lines>
 
-                <ion-item [navPush]="pushPage" *ngFor="let dailyfilm of dailyfilms">
+                <ion-item class="item_film" [navPush]="pushPage" *ngFor="let dailyfilm of dailyfilms">
                     <ion-thumbnail item-start>
                         <img src="{{dailyfilm.poster}}" class="img_film">
                     </ion-thumbnail>
@@ -31,11 +31,15 @@
                     <p class="detail">Genere: {{dailyfilm.genre}}</p>
                     <p *ngIf="dailyfilm.actor !=  '' " class="detail">Attori: {{dailyfilm.actor}}</p>
                     <p class="detail">Durata: {{dailyfilm.runningTime}} minuti</p>
-                    <p class="detail">Prezzo: €{{dailyfilm.price}}</p>
-                    <div item-end>
-                        <p *ngFor="let screening of dailyfilm.screenings" class="detail">{{screening.hour}}</p>
+                    <p class="detail">Prezzo: € {{dailyfilm.price}}</p>
+                    <div item-end margin-left>
+                        <p class="detail" *ngFor="let screening of dailyfilm.screenings" class="detail">{{screening.hour}}</p>
                     </div>
                 </ion-item>
+                
+                <div padding text-justify *ngIf="dailyfilms == undefined ">
+                    <h2>Tutti gli spettacoli sono terminati o non sono presenti, si prega di consultare la scheda relativa ai film settimanali.</h2>
+                </div>
 
             </ion-list>
         </ion-list>
@@ -43,7 +47,7 @@
         <ion-list *ngSwitchCase="'settimana'">
             <ion-list no-lines>
 
-                <ion-item [navPush]="pushPage" *ngFor="let weeklyfilm of weeklyfilms">
+                <ion-item class="item_film" [navPush]="pushPage" *ngFor="let weeklyfilm of weeklyfilms">
                     <ion-thumbnail item-start>
                         <img src="{{weeklyfilm.poster}}" class="img_film">
                     </ion-thumbnail>
@@ -52,12 +56,9 @@
                     <p class="detail">Genere: {{weeklyfilm.genre}}</p>
                     <p *ngIf="weeklyfilm.actor !=  '' " class="detail">Attori: {{weeklyfilm.actor}}</p>
                     <p class="detail">Durata: {{weeklyfilm.runningTime}} minuti</p>
-                    <p class="detail">Prezzo: €{{weeklyfilm.price}}</p>
-                    <div item-end>
-                        <p class="detail">01/01</p>
-                        <p class="detail">01/02</p>
-                        <p class="detail">01/03</p>
-                        <p class="detail">01/04</p>
+                    <p class="detail">Prezzo: € {{weeklyfilm.price}}</p>
+                    <div item-end margin-left>
+                        <p class="detail" *ngFor="let screening of weeklyfilm.screenings" class="detail">{{screening.day}}</p>
                     </div>
                 </ion-item>
 
@@ -67,18 +68,19 @@
         <ion-list *ngSwitchCase="'inarrivo'">
             <ion-list no-lines>
 
-                <ion-item [navPush]="pushPage" *ngFor="let comingsoonfilm of comingsoonfilms">
+                <ion-item class="item_film" [navPush]="pushPage" *ngFor="let comingsoonfilm of comingsoonfilms">
                     <ion-thumbnail item-start>
                         <img src="{{comingsoonfilm.poster}}" class="img_film">
                     </ion-thumbnail>
                     <h2 light_grey>{{comingsoonfilm.title}}</h2>
                     <p class="detail">Regia: {{comingsoonfilm.director}}</p>
-                    <p class="detail">Genere: {{comingsoon.genre}}</p>
+                    <p class="detail">Genere: {{comingsoonfilm.genre}}</p>
                     <p *ngIf="comingsoonfilm.actor !=  '' " class="detail">Attori: {{comingsoonfilm.actor}}</p>
                     <p class="detail">Durata: {{comingsoonfilm.runningTime}} minuti</p>
-                    <p class="detail">Prezzo: €{{comingsoonfilm.price}}</p>
-                    <div item-end>
-                        <p class="detail">Dal {{comingsoonfilm.releaseTime}}</p>
+                    <p class="detail">Prezzo: € {{comingsoonfilm.price}}</p>
+                    <div item-end margin-left>
+                        <p text-center class="detail">Dal</p>
+                        <p class="detail">{{comingsoonfilm.releaseDate}}</p>
                     </div>
                 </ion-item>
 

@@ -55,7 +55,7 @@ public class Film implements java.io.Serializable {
     private String trailer;
 
     @Column(name = "release_date", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM", timezone="Europe/Rome")
     private Date releaseDate;
 
     @Column(name = "price", nullable = false)
