@@ -14,19 +14,19 @@ export class SeatProvider {
 
   private _seats: Array<Seat> = null;
 
-  constructor(private _http: Http) {
+  constructor(private _http: Http, private _screeningid: number) {
     console.log('Hello SeatProvider Provider');
   }
 
-  getPurchasedSeats(): Promise < Array<Seat > > {
+  getPurchasedSeats(): Promise < Array<Seat> > {
     
     return new Promise((resolve) => {
       
       if (this._seats === null) {
 	this._seats = [];
-	this._http.get('api/purchase/'+id)
+	this._http.get('api/purchase/'+this._id).toPromise()
 	  .then((res: Response) => {
-	    const json = res.json() as ResponseServer;
+	    const json = res.json() as Array<Seat>;
 	    if (json.result) {
 	      const seats = json.data;
 	      for (let seat of _seats) {

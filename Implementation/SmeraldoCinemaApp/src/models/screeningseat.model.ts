@@ -5,7 +5,8 @@ export class ScreeningSeat{
   
   set(obj? : any){
     if(obj){
-      if(typeof obj === Seat)
+      this.seat = obj.seat || this.seat;
+      this.screening = obj.screening || this.screening;
     }
   }
 }

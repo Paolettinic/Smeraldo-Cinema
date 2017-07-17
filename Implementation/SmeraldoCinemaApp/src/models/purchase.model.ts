@@ -9,9 +9,9 @@ export class Purchase{
 
   set(obj?: any){
     if(obj){
-      this.id = obj.id || this.id
-      this.column = (typeof obj.id === "number") ? obj.column : this.column;
-      this.row = obj.row || this.row; 
+      this.id = obj.id || this.id;
+      this.mail = obj.mail || this.mail;
+      this.qrcode = obj.qrcode || this.qrcode;
     }
   }
   
