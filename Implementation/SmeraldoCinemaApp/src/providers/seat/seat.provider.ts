@@ -24,7 +24,7 @@ export class SeatProvider {
       
       if (this._seats === null) {
 	this._seats = [];
-	this._http.get('api/purchase/'+this._id).toPromise()
+	this._http.get('api/purchase/'+this._screeningid).toPromise()
 	  .then((res: Response) => {
 	    const json = res.json() as Array<Seat>;
 	    if (json.result) {
