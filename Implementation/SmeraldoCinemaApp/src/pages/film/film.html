@@ -22,7 +22,7 @@
         <ion-list *ngSwitchCase="'oggi'">
             <ion-list no-lines>
 
-                <ion-item class="item_film" [navPush]="pushPage" *ngFor="let dailyfilm of dailyfilms">
+                <ion-item class="item_film" (click)='dailyfilminfo(dailyfilm.id);' *ngFor="let dailyfilm of dailyfilms">
                     <ion-thumbnail item-start>
                         <img src="{{dailyfilm.poster}}" class="img_film">
                     </ion-thumbnail>
@@ -37,7 +37,7 @@
                     </div>
                 </ion-item>
                 
-                <div padding text-justify *ngIf="dailyfilms == undefined ">
+                <div padding text-justify *ngIf="dailyfilms == undefined">
                     <h2>Tutti gli spettacoli sono terminati o non sono presenti, si prega di consultare la scheda relativa ai film settimanali.</h2>
                 </div>
 
@@ -47,7 +47,7 @@
         <ion-list *ngSwitchCase="'settimana'">
             <ion-list no-lines>
 
-                <ion-item class="item_film" [navPush]="pushPage" *ngFor="let weeklyfilm of weeklyfilms">
+                <ion-item class="item_film" (click)='weeklyfilminfo(weeklyfilm.id);' *ngFor="let weeklyfilm of weeklyfilms">
                     <ion-thumbnail item-start>
                         <img src="{{weeklyfilm.poster}}" class="img_film">
                     </ion-thumbnail>
@@ -68,7 +68,7 @@
         <ion-list *ngSwitchCase="'inarrivo'">
             <ion-list no-lines>
 
-                <ion-item class="item_film" [navPush]="pushPage" *ngFor="let comingsoonfilm of comingsoonfilms">
+                <ion-item class="item_film" (click)='comingsoonfilminfo(comingsoonfilm.id);' *ngFor="let comingsoonfilm of comingsoonfilms">
                     <ion-thumbnail item-start>
                         <img src="{{comingsoonfilm.poster}}" class="img_film">
                     </ion-thumbnail>

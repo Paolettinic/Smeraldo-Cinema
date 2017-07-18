@@ -12,6 +12,7 @@ export class FilmProvider {
     private _dailyfilms: Array<Film> = null;
     private _weeklyfilms: Array<Film> = null;
     private _comingsoonfilms: Array<Film> = null;
+    private _film: Film;
 
     constructor(public _http: Http) {
         console.log('Hello FilmProvider Provider');
@@ -74,6 +75,17 @@ export class FilmProvider {
             } else {
                 resolve(this._comingsoonfilms);
             }
+        });
+    }
+    
+    getFilm(id): Promise<Film> {
+        return new Promise((resolve) => {
+            this._http.get('api/films/' + id).toPromise()
+                .then((res: Response) => {
+                    this._film = res.json() as Film;
+                    resolve(this._film);
+                })
+                .catch(() => resolve(this._film));
         });
     }
 }
