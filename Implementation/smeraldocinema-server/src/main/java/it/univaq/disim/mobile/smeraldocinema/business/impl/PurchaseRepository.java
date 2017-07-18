@@ -4,6 +4,7 @@ import it.univaq.disim.mobile.smeraldocinema.business.domain.Purchase;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface PurchaseRepository  extends JpaRepository<Purchase, Long>  {
     
@@ -20,6 +21,6 @@ public interface PurchaseRepository  extends JpaRepository<Purchase, Long>  {
      * @param screening_id
      * @return lista di acquisti
      */
-    @Query("Select p from Purchase p where p.id.screening.id = ?0")
-    List<Purchase> findByIdScreening (Long screening_id);
+    @Query(value = "SELECT * FROM purchases WHERE screening_id = :id",nativeQuery = true)
+    List<Purchase> findByIdScreening (@Param("id")Long screening_id);
 }

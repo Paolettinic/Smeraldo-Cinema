@@ -1,5 +1,6 @@
 package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.AssociationOverride;
@@ -25,7 +26,8 @@ public class Booking implements java.io.Serializable {
 
     @Embeddable
     public static class ScreeningSeatId implements java.io.Serializable {
-
+	
+	@JsonIgnore
         @ManyToOne
         private Screening screening;
 

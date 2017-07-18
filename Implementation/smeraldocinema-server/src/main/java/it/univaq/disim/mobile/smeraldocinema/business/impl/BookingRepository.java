@@ -3,6 +3,8 @@ package it.univaq.disim.mobile.smeraldocinema.business.impl;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Booking;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface BookingRepository  extends JpaRepository<Booking, Long> {
     
@@ -18,6 +20,7 @@ public interface BookingRepository  extends JpaRepository<Booking, Long> {
      * @param screening_id
      * @return lista di prenotazioni
      */
-    List<Booking> findByIdScreening (Long screening_id);
+    @Query(value = "SELECT * FROM bookings WHERE screening_id = :id",nativeQuery = true)
+    List<Booking> findByIdScreening (@Param("id")Long screening_id);
     
 }

@@ -1,5 +1,6 @@
 package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.AssociationOverride;
@@ -22,11 +23,13 @@ import javax.persistence.Table;
     @AssociationOverride(name = "id.seat", joinColumns = @JoinColumn(name = "seat_id")),
     @AssociationOverride(name = "id.screening", joinColumns = @JoinColumn(name = "screening_id"))
 })
-public class Purchase implements java.io.Serializable {
 
+public class Purchase implements java.io.Serializable {
+    
     @Embeddable
     public static class ScreeningSeatId implements java.io.Serializable {
-
+	
+	@JsonIgnore
         @ManyToOne
         private Screening screening;
 
@@ -60,17 +63,17 @@ public class Purchase implements java.io.Serializable {
     @Column(name = "mail", nullable = false)
     private String mail;
 
-    @Column(name = "qr_code", nullable = false)
-    private String qr_code;
+    @Column(name = "qrcode", nullable = false)
+    private String qrCode;
 
     public Purchase() {
     }
 
-    public Purchase(Screening screening, Seat seat, String mail, String qr_code) {
+    public Purchase(Screening screening, Seat seat, String mail, String qrCode) {
         this.setScreening(screening);
 	this.setSeat(seat);
         this.mail = mail;
-        this.qr_code = qr_code;
+        this.qrCode = qrCode;
     }
 
     public ScreeningSeatId getId() {
@@ -90,11 +93,11 @@ public class Purchase implements java.io.Serializable {
     }
 
     public String getQr_Code() {
-        return qr_code;
+        return qrCode;
     }
 
-    public void setQr_Code(String qr_code) {
-        this.qr_code = qr_code;
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
     }
     
     public void setScreening(Screening s){

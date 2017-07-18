@@ -23,9 +23,13 @@ public class PurchaseController {
     @PostMapping("/create")
     public boolean createPurchases (@RequestBody List<Purchase> purchases) {
         String qrcode = Utility.generateQrCode();
+	Boolean done = false;
         for(Purchase purchase : purchases) {
-            service.createPurchase(purchase, qrcode);
+            if(!(service.createPurchase(purchase, qrcode))){
+	      return false;
+	    }
         }
+	service.savePurchases(purchases);
         return true;
     }
     

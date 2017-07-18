@@ -1,5 +1,6 @@
 package it.univaq.disim.mobile.smeraldocinema.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,13 +29,16 @@ public class Seat implements java.io.Serializable {
 
     @Column(name = "row", nullable = false)
     private String row;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "id.seat")
     private List<Booking> bookings = new ArrayList();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.seat")
     private List<Purchase> purchases = new ArrayList();
-
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "theater_id", nullable = false)
     private Theater theater;

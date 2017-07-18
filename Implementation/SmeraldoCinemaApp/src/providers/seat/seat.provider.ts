@@ -5,6 +5,9 @@ import 'rxjs/add/operator/toPromise';
 
 //Models
 import { Seat } from '../../models/seat.model';
+import { Purchase } from '../../models/purchase.model'; 
+import { Booking } from '../../models/booking.model'; 
+import { ScreeningSeat } from '../../models/screeningseat.model' 
 
 @Injectable()
 export class SeatProvider {
@@ -22,14 +25,12 @@ export class SeatProvider {
       
       if (this._purchasedseats === null) {
 	this._purchasedseats = [];
-	this._http.get('api/purchases/'+this._screening).toPromise()
+	this._http.get('api/purchases/1').toPromise()
 	  .then((res: Response) => {
-	    /*const seats = res.json() as Array<Seat>;
-	    for (let seat of seats) {
-	      this._purchasedseats.push(new Seat(seat));
-	    }*/
-	    this._purchasedseats = res.json();
-	    console.log(this._purchasedseats);
+	    const purchases = res.json() as Array<Purchase>;
+	    for (let purchase of purchases) {
+	      this._purchasedseats.push(new Seat(purchase.id.seat));
+	    }
 	    resolve(this._purchasedseats);
 	  })
 	  .catch(() => resolve(this._purchasedseats));
@@ -45,13 +46,12 @@ export class SeatProvider {
       
       if (this._bookedseats === null) {
 	this._bookedseats = [];
-	this._http.get('api/purchases/'+this._screening).toPromise()
+	this._http.get('api/bookings/4').toPromise()
 	  .then((res: Response) => {
-	    /*const seats = res.json() as Array<Seat>;
-	    for (let seat of seats) {
-	      this._bookedseats.push(new Seat(seat));
-	    }*/
-	    this._bookedseats = res.json();
+	    const bookings = res.json() as Array<Booking>;
+	    for (let booking of bookings) {
+	      this._bookedseats.push(new Seat(booking.id.seat));
+	    }
 	    resolve(this._bookedseats);
 	  })
 	  .catch(() => resolve(this._bookedseats));

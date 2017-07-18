@@ -178,7 +178,14 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
         bookingRepository.save(booking);
         return true;
     }
-
+    
+    public boolean savePurchases(List<Purchase> purchases){
+      for(Purchase p : purchases){
+	purchaseRepository.save(p);
+      }
+      return true;
+    }
+    
     @Override
     public boolean createPurchase(Purchase purchase, String qrcode) {
         for (Purchase purchase_ext : purchase.getId().getSeat().getPurchases()) {
@@ -191,8 +198,8 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
                 return false;
             }
         }
-        purchase.setQr_Code(qrcode);
-        purchaseRepository.save(purchase);
+        purchase.setQrCode(qrcode);
+        //purchaseRepository.save(purchase);
         return true;
     }
 

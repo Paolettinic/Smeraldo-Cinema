@@ -23,6 +23,8 @@ public interface SmeraldoCinemaService {
     boolean createBooking(Booking booking, String code);
 
     boolean createPurchase(Purchase purchase, String qrcode);
+    
+    boolean savePurchases(List<Purchase> purchases);
 
     List<Screening> findAllScreeningsByPkFilm (Long id);
     

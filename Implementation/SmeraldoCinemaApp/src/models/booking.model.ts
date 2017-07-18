@@ -1,11 +1,10 @@
 import { ScreeningSeat } from '../models/screeningseat.model';
 
 
-export class Purchase{
+export class Booking{
   
   public id : ScreeningSeat = null;
-  public mail : string = "";
-  public qrcode : string = "";
+  public code : string = "";
   
   constructor(obj?: any){
     this.set(obj);
@@ -14,10 +13,11 @@ export class Purchase{
   set(obj?: any){
     if(obj){
       this.id = obj.id || this.id;
-      this.mail = obj.mail || this.mail;
-      this.qrcode = obj.qr_Code || this.qrcode;
+      this.code = obj.code || this.code;
     }
   }
   
 }
+
+
 
