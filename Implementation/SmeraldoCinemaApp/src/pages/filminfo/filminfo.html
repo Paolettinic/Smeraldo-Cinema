@@ -10,28 +10,28 @@
 
     <ion-grid *ngIf="typefilm !=  'comingsoon' ">
         <ion-row class="personal_md">
-            <ion-col col-2 *ngFor="let day of days"><button ion-button small full color="light_dark"  id="{{day}}" value="{{day}}">{{day}}</button></ion-col>
+            <ion-col col-2 class="no_padding_top_bottom" *ngFor="let day of days"><button ion-button small full color="light_grey"  id="{{day}}" value="{{day}}" (click)='changehours(day);'>{{day}}</button></ion-col>
 
         </ion-row>
         <ion-row>
-            <ion-col col-3 text-center *ngFor="let hour of hours">{{hour}}</ion-col>
+            <ion-col col-3 class="no_padding_top_bottom" text-center *ngFor="let hour of hours"><button ion-button small full color="light_grey">{{hour}}</button></ion-col>
         </ion-row>
     </ion-grid>
 
-    <ion-grid>
+    <ion-grid class="no_padding_top_bottom">
         <ion-row>
             <ion-col col-5>
                 <img [src]="film.poster" class="img_film">
             </ion-col>
             <ion-col col-7>
                 <h3>{{film.title}}</h3>
-                <p class="no_margin_top_bottom">Regia: {{film.director}}</p>
-                <p class="no_margin_top_bottom">Genere: {{film.genre}}</p>
-                <p *ngIf="film.actor !=  '' " class="no_margin_top_bottom">Attori: {{film.actor}}</p>
-                <p class="no_margin_top_bottom">Durata: {{film.runningTime}} minuti</p>
-                <p class="no_margin_top_bottom">Paese: {{film.country}}</p>
-                <p *ngIf="film.recognition !=  '' " class="no_margin_top_bottom">Riconoscimenti: {{film.recognition}}</p>
-                <p class="no_margin_top_bottom">Prezzo: € {{film.price}}</p>
+                <p class="margin_top_bottom_5">Regia: {{film.director}}</p>
+                <p class="margin_top_bottom_5">Genere: {{film.genre}}</p>
+                <p *ngIf="film.actor !=  '' " class="margin_top_bottom_5">Attori: {{film.actor}}</p>
+                <p class="margin_top_bottom_5">Durata: {{film.runningTime}} minuti</p>
+                <p class="margin_top_bottom_5">Paese: {{film.country}}</p>
+                <p *ngIf="film.recognition !=  '' " class="margin_top_bottom_5">Riconoscimenti: {{film.recognition}}</p>
+                <p class="margin_top_bottom_5">Prezzo: € {{film.price}}</p>
             </ion-col>
         </ion-row>     
     </ion-grid>

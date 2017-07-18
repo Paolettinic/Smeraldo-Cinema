@@ -19,11 +19,10 @@
 <ion-content>
 
     <div [ngSwitch]="film">
-        <ion-list *ngSwitchCase="'oggi'">
-            <ion-list no-lines>
+        <ion-list no-lines *ngSwitchCase="'oggi'">
 
                 <ion-item class="item_film" (click)='dailyfilminfo(dailyfilm.id);' *ngFor="let dailyfilm of dailyfilms">
-                    <ion-thumbnail item-start>
+                          <ion-thumbnail item-start>
                         <img src="{{dailyfilm.poster}}" class="img_film">
                     </ion-thumbnail>
                     <h2 light_grey>{{dailyfilm.title}}</h2>
@@ -36,19 +35,24 @@
                         <p class="detail" *ngFor="let screening of dailyfilm.screenings" class="detail">{{screening.hour}}</p>
                     </div>
                 </ion-item>
-                
-                <div padding text-justify *ngIf="dailyfilms == undefined">
-                    <h2>Tutti gli spettacoli sono terminati o non sono presenti, si prega di consultare la scheda relativa ai film settimanali.</h2>
-                </div>
 
-            </ion-list>
+                <div padding text-justify *ngIf="dailyfilms.length == 0">
+                    <ion-card color="light_dark">
+                        <ion-card-header>
+                            Attenzione!
+                        </ion-card-header>
+                        <ion-card-content>
+                            Tutti gli spettacoli sono terminati o non sono presenti, si prega di consultare la scheda relativa ai film settimanali.
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+                  
         </ion-list>
 
-        <ion-list *ngSwitchCase="'settimana'">
-            <ion-list no-lines>
+        <ion-list no-lines *ngSwitchCase="'settimana'">
 
                 <ion-item class="item_film" (click)='weeklyfilminfo(weeklyfilm.id);' *ngFor="let weeklyfilm of weeklyfilms">
-                    <ion-thumbnail item-start>
+                          <ion-thumbnail item-start>
                         <img src="{{weeklyfilm.poster}}" class="img_film">
                     </ion-thumbnail>
                     <h2 light_grey>{{weeklyfilm.title}}</h2>
@@ -62,11 +66,9 @@
                     </div>
                 </ion-item>
 
-            </ion-list>
         </ion-list>
 
-        <ion-list *ngSwitchCase="'inarrivo'">
-            <ion-list no-lines>
+        <ion-list no-lines *ngSwitchCase="'inarrivo'">
 
                 <ion-item class="item_film" (click)='comingsoonfilminfo(comingsoonfilm.id);' *ngFor="let comingsoonfilm of comingsoonfilms">
                     <ion-thumbnail item-start>
@@ -84,7 +86,6 @@
                     </div>
                 </ion-item>
 
-            </ion-list>
         </ion-list>
     </div>
 

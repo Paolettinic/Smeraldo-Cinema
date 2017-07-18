@@ -149,7 +149,28 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
 
     @Override
     public Film findFilm(Long id) {
-        return filmRepository.findById(id);
+        
+        //Creo la data odierna anche nel formato yyyy-MM-dd
+        Date now = new Date();
+        String nowfrm = new SimpleDateFormat("yyyy-MM-dd").format(now);
+
+        //Recupero il film
+        Film film = filmRepository.findById(id);
+        List<Screening> screenings = film.getScreenings();
+        List<Screening> newscreenings = new ArrayList<>(screenings);
+        int nscreenings = screenings.size();
+
+        for (int i = 0; i < nscreenings; i++) {
+            //Trasformo la data della proiezione corrente in una strina
+            String scrfrm = new SimpleDateFormat("yyyy-MM-dd").format(screenings.get(i).getDay());
+            if (nowfrm.compareTo(scrfrm) > 0) {
+                //Rimuovo la proiezione non giornaliera o già avvenuta
+                newscreenings.remove(screenings.get(i));
+            }
+        }
+        film.setScreenings(newscreenings);
+        return film;
+        
     }
 
     @Override

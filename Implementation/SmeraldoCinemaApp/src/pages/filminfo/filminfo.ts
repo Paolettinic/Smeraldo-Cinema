@@ -59,7 +59,6 @@ export class FilminfoPage {
                     }
                 }
             }
-            
             //Inizializzo days
             for (var k = 0; k < 7; k++) {
                 if (this.newscreenings[k][0] == undefined) break;
@@ -76,21 +75,50 @@ export class FilminfoPage {
 
     ionViewDidEnter() {
         console.log('ionViewDidLoad FilminfoPage');
-        //Inizializzo il bottone nel primo giorno di verde
-        var firstbutton = this.days[0];
-        var button = document.getElementById(firstbutton);
+        if (this.filmtype != "comingsoon") {
+            //Inizializzo il bottone nel primo giorno di verde
+            var firstbutton = this.days[0];
+            var button = document.getElementById(firstbutton);
+            button.classList.add("primary");
+        }
+    }
+    
+    changehours (id) {
+        for (var i = 0; i < this.hours.length+1; i++) {
+            if (this.days[i] != id) {
+                var extbutton = document.getElementById(this.days[i]);
+                extbutton.classList.remove("primary");
+                extbutton.classList.add("light_grey");
+            }  
+        }
+        var button = document.getElementById(id);
+        button.classList.remove("light_grey");
         button.classList.add("primary");
+        //Cambio il valore dell'array hours
+        for (var j = 0; j < this.newscreenings.length; j++) {
+            if (this.newscreenings[j][0] == id) {
+                for (var k = 1, y = 0; k < this.newscreenings[j].length; k++, y++) {
+                    this.hours[y] = this.newscreenings[j][k];
+                }
+                break;
+            }
+        }
+        
     }
     
     purchase(id, fab: FabContainer) {
-        var scelta = "purchase"
-        this.navCtrl.push(SeatsPage, {id, scelta});
+        var scelta = "purchase";
+        var film = this.film;
+        var newscreenings = this.newscreenings;
+        this.navCtrl.push(SeatsPage, {film, scelta, newscreenings});
         fab.close();
     }
     
     booking(id, fab: FabContainer) {
-        var scelta = "booking"
-        this.navCtrl.push(SeatsPage, {id, scelta});
+        var scelta = "booking";
+        var film = this.film;
+        var newscreenings = this.newscreenings;
+        this.navCtrl.push(SeatsPage, {film, scelta, newscreenings});
         fab.close();
     }
 
