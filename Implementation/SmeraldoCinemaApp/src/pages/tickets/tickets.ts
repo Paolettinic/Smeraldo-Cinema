@@ -1,14 +1,25 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
+//Models
+import {Ticket} from '../../models/ticket.model';
 
 @Component({
     selector: 'page-tickets',
     templateUrl: 'tickets.html'
 })
 export class TicketsPage {
-
-    constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+    
+    tickets: Array<Ticket> = [];
+    
+constructor(public navCtrl: NavController, public alertCtrl: AlertController, private storage: Storage) {
+    
+        this.storage.get('tickets')
+        .then((value) => {
+        this.tickets = value;
+        });
     }
     
     showAlert() {
@@ -27,5 +38,5 @@ export class TicketsPage {
       buttons: ['OK']
     });
     alert.present();
-  }
+    }
   }
