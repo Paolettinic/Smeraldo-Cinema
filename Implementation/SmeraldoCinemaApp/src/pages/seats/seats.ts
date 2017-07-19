@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SeatProvider} from '../../providers/seat/seat.provider'
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Seat } from '../../models/seat.model';
+import { Film } from '../../models/film.model';
 import { Purchase } from '../../models/purchase.model';
 
 /**
@@ -23,8 +24,11 @@ export class SeatsPage {
   
   days : string[] = ["15/07","16/07","17/07","18/07","19/07",""];
   times : string[] = [];
-  idfilm : number = 1;
-  //choose : string = "booking";
+  
+  /*  nav params  */
+  film : Film  = null;
+  choose : string = "booking"; // o purchase
+  screenings : Array<Array<string>> = [];
 
   
   sala : number = 1;
@@ -32,50 +36,59 @@ export class SeatsPage {
   rows : string[] = ['A','B','C','D','E','F','G','H','I','J','K','L'];
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public sSeats: SeatProvider) {
+      this.film = this.navParams.get('this.film');
+      this.choose = this.navParams.get('scelta');
+      this.screenings = this.navParams.get('this.screenings');
       this.sSeats.getPurchasedSeats().then(purchasedSeats => {
 	this.purchasedseats = purchasedSeats;
 	for(let seat of this.purchasedseats){
-	  this.setPurchasedSeat(seat);
+	  this.setPurchasedSeat(this.seatToString(seat));
 	}
 	this.sSeats.getBookedSeats().then(bookedSeats => {
 	  this.bookedseats = bookedSeats;
 	  for(let bseat of this.bookedseats){
-	    this.setBookedSeat(bseat);
+	    this.setBookedSeat(this.seatToString(bseat));
 	  }
 	});
       });      
             
   }
-  
+  seatToString(s){
+    return ""+s.row+s.number;
+  }
   selectSeat(r,c){
+    if(this.selectedseats.length >= 20) return;
     let button = document.getElementById(r+c);
     if(button.classList.contains('booked')) return;
     if(button.classList.contains('purchased')) return;
     if(!this.selectedseats.some(x => x == (r+c))){
+      document.getElementById("bottone").removeAttribute('disabled');
       this.selectedseats.push(r+c);
       button.classList.add("selected");
     }
     else{
+      if(this.selectedseats.length <= 1){
+	document.getElementById("bottone").setAttribute('disabled','disabled');
+      }
       let index: number = this.selectedseats.indexOf(r+c);
       this.selectedseats.splice(index,1);
       button.classList.remove("selected");
     }
-    console.log(r+c);
-    console.log(this.selectedseats); 
   }
   
   setBookedSeat(s){
-    console.log(s);
-    let seat = document.getElementById(""+s.row+s.number);
-    seat.classList.add('booked');
+    let st = document.getElementById(s);
+    st.classList.add('booked');
   }
   
   setPurchasedSeat(s){
-    console.log(s);
-    let seat = ""+s.row+s.number;
-    document.getElementById(seat).classList.add('purchased');
+    let st = document.getElementById(s) ;
+    st.classList.add('purchased');
   }
-  
+  doPurchaseBooking(){
+    if(this.selectedseats.length < 1) return;
+    
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SeatsPage');
   }

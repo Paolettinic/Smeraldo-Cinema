@@ -8,6 +8,11 @@
 
   <ion-navbar color="dark">
     <ion-title>Selezione dei posti</ion-title>
+    <ion-buttons end>
+      <button id="bottone" [navPush]="pushPage" (click)="doPurchaseBooking()" disabled ion-button icon-only>
+	<ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

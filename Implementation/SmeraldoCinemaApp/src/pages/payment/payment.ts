@@ -9,7 +9,9 @@ import { ItemSliding } from 'ionic-angular';
 import {PaymentPP} from '../../models/paymentPP.model';
 import {PaymentCC} from '../../models/paymentCC.model';
 import {Seat} from '../../models/seat.model';
+import {ScreeningSeat} from '../../models/screeningseat.model';
 import {Purchase} from '../../models/purchase.model';
+import {PurchaseProvider} from '../../providers/purchase/purchase.provider';
 
 @IonicPage()
 @Component({
@@ -27,7 +29,7 @@ export class PaymentPage {
     pushPage: any;
     listofpayments: string ="";
         
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public _provider: PurchaseProvider, private storage: Storage) {
     
     this.pushPage = CodesPage;
         
@@ -47,19 +49,19 @@ export class PaymentPage {
         this.paymentsCC = value;
         });
         
-        let s1 = new Seat({'id':1,'number':1,'row':'A'});
-        let s2 = new Seat({'id':1,'number':2,'row':'A'});
-        let s3 = new Seat({'id':1,'number':3,'row':'A'});
+        let s1 = new Seat({id:1,number:1,row:'A'});
+        let s2 = new Seat({id:1,number:2,row:'A'});
+        let s3 = new Seat({id:1,number:3,row:'A'});
         this.seats.push(s1);
         this.seats.push(s2);
         this.seats.push(s3);
         
-        let screeningseat1 = new ScreaningSeat({s1});
-        let screeningseat2 = new ScreaningSeat({s2});
-        let screeningseat3 = new ScreaningSeat({s3});
-        this.purchases.push(screeningseat1,"alice@alice","hyyfhd");
-        this.purchases.push(screeningseat2,"nicolo@nicolo","hygdh");
-        this.purchases.push(screeningseat3,"mario@mario","hjdb");
+        let screeningseat1 = new ScreeningSeat({s1});
+        let screeningseat2 = new ScreeningSeat({s2});
+        let screeningseat3 = new ScreeningSeat({s3});
+        //this.purchases.push(new Purchase({id:screeningseat1,mail:"alice@alice",qrcode:"hyyfhd"}));
+        //this.purchases.push(new Purchase({id:screeningseat2,mail:"nicolo@nicolo",qrcode:"hygdh"}));
+        //this.purchases.push(new Purchase({id:screeningseat3,mail:"mario@mario",qrcode:"hjdb"}));
 
   }
        
@@ -99,7 +101,25 @@ export class PaymentPage {
       ]
     }).present();
   }
-
+  
+  getPay(pay : string){
+    for(let p of this.paymentsPP){
+      if(p.email === pay) return p;
+    }
+  }
+  
+  savePayment(){
+    let p = this.getPay(this.listofpayments);
+    console.log(p.email);
+    for(let s of this.seats){
+      let purchase = new Purchase({id:new ScreeningSeat({seat:s}), mail:p.email, qrcode:""});
+      //console.log(purchase);
+      this.purchases.push(purchase);
+      //console.log(this.purchases);
+    }
+    this._provider.savePurchase(this.purchases);
+  }
+  
   savePaymentPP(e: string, p: string) {
         let paymn= new PaymentPP({email:e,password:p});
         this.paymentsPP.push(paymn);

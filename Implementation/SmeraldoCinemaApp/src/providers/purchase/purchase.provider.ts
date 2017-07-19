@@ -1,46 +1,45 @@
 import { Injectable } from '@angular/core';
+import { Purchase } from '../../models/purchase.model';
 import { Http, Response } from '@angular/http';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class PurchaseProvider {
 
-private _purchases: Array<Purchase> = null;
+//private _purchases: Array<Purchase> = null;
 
-constructor(public _http: Http) {
+constructor(private _http: Http) {
         console.log('Hello PurchaseProvider Provider');
     }
     
     /**
      * Salva un purchase sul server
      */
-    savePurchase(purchase: Array<Purchase>): Promise<any> {
-            return this._createPurchase(purchase);
-        }
+    savePurchase(purchases: Array<Purchase>): Promise<any> {
+      console.log("DIO");
+        return new Promise((resolve, reject) => {
+	    console.log("PORCO");
+            this._http.post('api/purchases/create', {
+                purchases: purchases
+            }).toPromise()
+            .then((res: Response) => {
+	      console.log("Bastardo");
+	      //const result = res.json() as boolean;
+	      resolve();
+	    })
+	    .catch(() => {
+	      console.log("ASSASSINO");
+	      reject();
+	    });
+        });
+    }
     /**
      * Crea un nuovo purchase sul server
      */
-    private _createPurchase(purchase: Array<Purchase>) {
-        return new Promise((resolve, reject) => {
-            this._http.post('api/purchases/create', {
-                email: purchase.email,
-                qrcode: purchase.qrcode,
-                screeningseatid: purchase.screeningseatid
-            })
-                .toPromise()
-                .then((res: Response) => {
-                    const json = res.json() as ResponseServer;
-                    if (json.result) {
-                        resolve();
-                    } else {
-                        reject();
-                    }
-                })
-                .catch(() => {
-                    reject();
-                });
-        });
+    private _createPurchase(purchase: Purchase) {
+	
     }
 
 }
