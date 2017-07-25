@@ -5,12 +5,14 @@ import it.univaq.disim.mobile.smeraldocinema.business.domain.Booking;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Film;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Purchase;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Screening;
+import it.univaq.disim.mobile.smeraldocinema.business.domain.Seat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import static javassist.CtMethod.ConstParameter.string;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -182,48 +184,67 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     public List<Purchase> findAllPurchasesByScreeningId(Long id) {
         return purchaseRepository.findByIdScreening(id);
     }
-
+    
     @Override
-    public boolean createBooking(Booking booking, String code) {
-        for (Booking booking_ext : booking.getId().getSeat().getBookings()) {
-            if (booking_ext.getId().getScreening().equals(booking.getId().getScreening())) {
-                return false;
-            }
+    public boolean createBookings(List<Booking> bookings) {
+        String code = Utility.generateCode();
+        for (int i = 0; i < bookings.size() ;i++) {
+            bookings.get(i).setCode(code);
+            bookingRepository.save(bookings.get(i));
         }
-        for (Purchase purchase_ext : booking.getId().getSeat().getPurchases()) {
-            if (purchase_ext.getId().getScreening().equals(booking.getId().getScreening())) {
-                return false;
-            }
-        }
-        booking.setCode(code);
-        bookingRepository.save(booking);
         return true;
     }
     
-    public boolean savePurchases(List<Purchase> purchases){
-      for(Purchase p : purchases){
-	purchaseRepository.save(p);
-      }
-      return true;
+    @Override
+    public String createPurchases(List<Purchase> purchases) {
+        String qrcode = Utility.generateQrCode();
+        for (int i = 0; i < purchases.size() ;i++) {
+            purchases.get(i).setQrCode(qrcode);
+            purchaseRepository.save(purchases.get(i));
+        }
+        return qrcode;
     }
     
     @Override
-    public boolean createPurchase(Purchase purchase, String qrcode) {
-        for (Purchase purchase_ext : purchase.getId().getSeat().getPurchases()) {
-            if (purchase_ext.getId().getScreening().equals(purchase.getId().getScreening())) {
-                return false;
+    public boolean checkPurchases(List<Purchase> purchases) {
+        for (Purchase purchase : purchases) {
+            Long myseat = purchase.getId().getSeat().getId();
+            List<Purchase> purchasesdb = purchaseRepository.findByIdSeat(myseat);
+            List<Booking> bookingsdb = bookingRepository.findByIdSeat(myseat);
+            for (int i = 0; i<purchasesdb.size() ;i++) {
+                if (purchasesdb.get(i).getId().getScreening().getId() == (purchase.getId().getScreening().getId())) {
+                    return false;
+                }
+            }
+            for (Booking bookingdb : bookingsdb) {
+                if (bookingdb.getId().getScreening().getId() == (purchase.getId().getScreening().getId())) {
+                    return false;
+                }
             }
         }
-        for (Booking booking_ext : purchase.getId().getSeat().getBookings()) {
-            if (booking_ext.getId().getScreening().equals(purchase.getId().getScreening())) {
-                return false;
-            }
-        }
-        purchase.setQrCode(qrcode);
-        //purchaseRepository.save(purchase);
         return true;
     }
-
+    
+    @Override
+    public boolean checkBookings(List<Booking> bookings) {
+        for (Booking booking : bookings) {
+            Long myseat = booking.getId().getSeat().getId();
+            List<Purchase> purchasesdb = purchaseRepository.findByIdSeat(myseat);
+            List<Booking> bookingsdb = bookingRepository.findByIdSeat(myseat);
+            for (int i = 0; i<bookingsdb.size() ;i++) {
+                if (bookingsdb.get(i).getId().getScreening().getId() == (booking.getId().getScreening().getId())) {
+                    return false;
+                }
+            }
+            for (Purchase purchasedb : purchasesdb) {
+                if (purchasedb.getId().getScreening().getId() == (booking.getId().getScreening().getId())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     @Override
     public void cleanBookings() {
         Date now = new Date();
@@ -248,4 +269,5 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     public List<Screening> findAllScreeningsByPkFilm(Long id) {
         return screeningRepository.findByFilm(id);
     }
+
 }

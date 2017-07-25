@@ -29,7 +29,7 @@ public class Purchase implements java.io.Serializable {
     @Embeddable
     public static class ScreeningSeatId implements java.io.Serializable {
 	
-	@JsonIgnore
+	//@JsonIgnore
         @ManyToOne
         private Screening screening;
 

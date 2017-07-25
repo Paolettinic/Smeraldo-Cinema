@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the CodesPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-codes',
@@ -14,7 +8,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CodesPage {
 
+    scelta: string = "";
+    code: string = "";
+    qrcode: string = "";
+    
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  
+  //this.qrcode = this.navParams.get('qrcode');
+ // this.code = this.navParams.get('code');
+  this.scelta = this.navParams.get('acquistato');
+  //console.log(this.qrcode);
+  //console.log(this.code);
+  console.log(this.scelta);
   }
 
   ionViewDidLoad() {

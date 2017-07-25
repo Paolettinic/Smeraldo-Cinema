@@ -7,9 +7,10 @@
             <h2>{{ticket.title}}</h2>
             <p>{{ticket.day}}</p>
             <p>{{ticket.hour}}</p>
-            <p>PRENOTATO</p>
+            <p *ngIf="ticket.ispurchased">ACQUISTATO</p>
+            <p *ngIf="!ticket.ispurchased">PRENOTATO</p>
             <p>{{ticket.seat}}</p>
-            <button ion-button clear item-end (click)='showAlert()'>INFO</button>
+            <button ion-button clear item-end (click)='showAlert(ticket.ispurchased, ticket.qrcode, ticket.code);'>INFO</button>
         </ion-item>
     </ion-list>
 </ion-content>

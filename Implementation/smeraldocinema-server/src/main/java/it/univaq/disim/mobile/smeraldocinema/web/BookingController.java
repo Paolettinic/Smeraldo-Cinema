@@ -22,11 +22,13 @@ public class BookingController {
     
     @PostMapping("/create")
     public boolean createBookings (@RequestBody List<Booking> bookings) {
-        String code = Utility.generateCode();
-        for (Booking booking : bookings) {
-            service.createBooking(booking, code);
-        }
+        service.createBookings(bookings);
         return true;
+    }
+    
+    @PostMapping("/check")
+    public boolean checkBookings (@RequestBody List<Booking> bookings){
+        return service.checkBookings(bookings);
     }
     
     @GetMapping("/{id}")

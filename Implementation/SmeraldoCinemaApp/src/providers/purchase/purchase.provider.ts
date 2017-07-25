@@ -1,45 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Purchase } from '../../models/purchase.model';
 import { Http, Response } from '@angular/http';
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+
+//Models
+import {Purchase} from '../../models/purchase.model';
 
 @Injectable()
 export class PurchaseProvider {
 
-//private _purchases: Array<Purchase> = null;
+    //private _purchases: Array<Purchase> = null;
 
-constructor(private _http: Http) {
+    constructor(private _http: Http) {
         console.log('Hello PurchaseProvider Provider');
     }
-    
-    /**
-     * Salva un purchase sul server
-     */
-    savePurchase(purchases: Array<Purchase>): Promise<any> {
-      console.log("DIO");
+
+    //Salvataggio dei purchases sul server
+    public _savePurchases(purchases: Array<Purchase>): Promise<string>{
+         return this._http.post('api/purchases/create', purchases)
+                .toPromise()
+                .then(
+                    res=> res.json().data as string
+                )
+                .catch(() => {
+                });
+    }
+        
+   //Controllo del purchase prima del salvataggio
+   public _checkPurchases(purchases: Array<Purchase>): Promise<boolean> {
         return new Promise((resolve, reject) => {
-	    console.log("PORCO");
-            this._http.post('api/purchases/create', {
-                purchases: purchases
-            }).toPromise()
-            .then((res: Response) => {
-	      console.log("Bastardo");
-	      //const result = res.json() as boolean;
-	      resolve();
-	    })
-	    .catch(() => {
-	      console.log("ASSASSINO");
-	      reject();
-	    });
+            this._http.post('api/purchases/check', purchases).toPromise().then((res: Response) => {
+                    const json = res.json() as boolean;
+                    resolve(json);
+                })
+                .catch(() => {
+                    reject();
+                });
         });
     }
-    /**
-     * Crea un nuovo purchase sul server
-     */
-    private _createPurchase(purchase: Purchase) {
-	
-    }
-
 }

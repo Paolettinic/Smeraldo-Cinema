@@ -24,6 +24,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { FilmProvider } from '../providers/film/film.provider';
 import { ScreeningProvider } from '../providers/screening/screening.provider';
 import { SeatProvider } from '../providers/seat/seat.provider';
+import { PurchaseProvider } from '../providers/purchase/purchase.provider';
+import {BookingProvider} from '../providers/booking/booking.provider';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { SeatProvider } from '../providers/seat/seat.provider';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FilmProvider,
     ScreeningProvider,
-    SeatProvider
+    SeatProvider,
+    PurchaseProvider,
+    BookingProvider
   ]
 })
 export class AppModule {}

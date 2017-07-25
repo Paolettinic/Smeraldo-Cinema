@@ -4,6 +4,7 @@ import it.univaq.disim.mobile.smeraldocinema.business.SmeraldoCinemaService;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Booking;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Purchase;
 import it.univaq.disim.mobile.smeraldocinema.business.impl.Utility;
+import static java.lang.System.console;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +22,15 @@ public class PurchaseController {
     private SmeraldoCinemaService service;
     
     @PostMapping("/create")
-    public boolean createPurchases (@RequestBody List<Purchase> purchases) {
-        String qrcode = Utility.generateQrCode();
-	Boolean done = false;
-        for(Purchase purchase : purchases) {
-            if(!(service.createPurchase(purchase, qrcode))){
-	      return false;
-	    }
-        }
-	service.savePurchases(purchases);
-        return true;
+    public String createPurchases (@RequestBody List<Purchase> purchases) {
+       return service.createPurchases(purchases);
     }
+    
+    @PostMapping("/check")
+    public boolean checkPurchases (@RequestBody List<Purchase> purchases){
+        return service.checkPurchases(purchases);
+    }
+            
     
     @GetMapping("/{id}")
     public List<Purchase> findAllByScreeningId (@PathVariable(value = "id") Long id) {

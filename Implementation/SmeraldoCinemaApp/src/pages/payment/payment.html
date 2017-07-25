@@ -2,40 +2,40 @@
     <ion-navbar color='dark'>
         <ion-title>Metodi di pagamento</ion-title>
         <ion-buttons end>
-            <button id="bottone" [navPush]="pushPage" disabled ion-button icon-only>
+            <button id="bottone" (click)='savePayment()' disabled ion-button icon-only>
                 <ion-icon name="checkmark"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <ion-list no-lines radio-group [(ngModel)]="listofpayments">
-              <ion-item-sliding #sliding *ngFor="let payPP of paymentsPP">
-              <ion-item>
-            <ion-label color='white'>{{payPP.email}}</ion-label>
-            <ion-radio (click)="disabled()" checked value="{{payPP.email}}"></ion-radio>
-        </ion-item>
-                  <ion-item-options side="right">
-                      <button ion-button class='slidingcolor'(click)="deletePaymentPP(payPP, sliding)"><ion-icon color="white" name="trash"></ion-icon></button>
-                  </ion-item-options>
+        <ion-item-sliding #sliding *ngFor="let payPP of paymentsPP">
+            <ion-item>
+                <ion-label color='white'>{{payPP.email}}</ion-label>
+                <ion-radio (click)="disabled(payPP.email)" checked value="{{payPP.email}}"></ion-radio>
+            </ion-item>
+                <ion-item-options side="right">
+                      <button expandable ion-button class='slidingcolor'(click)="deletePaymentPP(payPP, sliding)"><ion-icon color="white" name="trash"></ion-icon></button>
+                </ion-item-options>
         </ion-item-sliding>
-              <ion-item-sliding #sliding *ngFor="let payCC of paymentsCC">
-              <ion-item>
-            <ion-label color='white'>{{payCC.carta}}: {{payCC.numero}}</ion-label>
-            <ion-radio (click)="disabled()" checked value="{{payCC.carta}}"></ion-radio>
-        </ion-item>
-                  <ion-item-options side="right">
-                      <button ion-button class='slidingcolor'(click)="deletePaymentCC(payCC, sliding)"><ion-icon color="white" name="trash"></ion-icon></button>
-                  </ion-item-options>
+        <ion-item-sliding #sliding *ngFor="let payCC of paymentsCC">
+            <ion-item>
+                <ion-label color='white'>{{payCC.carta}}</ion-label>
+                <ion-radio (click)="disabled(payCC.email)" checked value="{{payCC.carta}}"></ion-radio>
+            </ion-item>
+                <ion-item-options side="right">
+                    <button expandable ion-button class='slidingcolor'(click)="deletePaymentCC(payCC, sliding)"><ion-icon color="white" name="trash"></ion-icon></button>
+                </ion-item-options>
         </ion-item-sliding>
     </ion-list>
      
     <ion-fab right bottom>
         <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
-        <ion-fab-list side="top">
-            <button ion-fab color="primary" (click)='popupPP()'>Pp<ion-label>Paypal</ion-label></button>
-            <button ion-fab color="primary" (click)='popupCC()'><ion-icon name="card"></ion-icon><ion-label>Carta di credito</ion-label></button>
-        </ion-fab-list>
+            <ion-fab-list side="top">
+                <button ion-fab color="primary" (click)='popupPP()'>P<ion-label>Paypal</ion-label></button>
+                <button ion-fab color="primary" (click)='popupCC()'><ion-icon name="card"></ion-icon><ion-label>Carta di credito</ion-label></button>
+            </ion-fab-list>
     </ion-fab>
 </ion-content>

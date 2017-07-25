@@ -19,12 +19,14 @@ public interface SmeraldoCinemaService {
     List<Booking> findAllBookingsByScreeningId(Long id);
 
     List<Purchase> findAllPurchasesByScreeningId(Long id);
-
-    boolean createBooking(Booking booking, String code);
-
-    boolean createPurchase(Purchase purchase, String qrcode);
     
-    boolean savePurchases(List<Purchase> purchases);
+    String createPurchases(List<Purchase> purchases);
+    
+    boolean createBookings(List<Booking> bookings);
+    
+    boolean checkPurchases(List<Purchase> purchases);
+    
+    boolean checkBookings(List<Booking> bookings);
 
     List<Screening> findAllScreeningsByPkFilm (Long id);
     

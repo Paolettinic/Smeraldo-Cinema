@@ -23,4 +23,13 @@ public interface PurchaseRepository  extends JpaRepository<Purchase, Long>  {
      */
     @Query(value = "SELECT * FROM purchases WHERE screening_id = :id",nativeQuery = true)
     List<Purchase> findByIdScreening (@Param("id")Long screening_id);
+    
+    
+    /**
+     * Restituisce la lista di acquisti per un posto
+     * @param seat_id
+     * @return lista di acquisti
+     */
+    @Query(value= "SELECT * FROM purchases WHERE seat_id = :id",nativeQuery = true)
+    List<Purchase> findByIdSeat (@Param("id")Long seat_id);
 }

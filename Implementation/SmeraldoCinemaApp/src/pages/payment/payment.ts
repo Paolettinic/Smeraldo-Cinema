@@ -12,6 +12,9 @@ import {Seat} from '../../models/seat.model';
 import {ScreeningSeat} from '../../models/screeningseat.model';
 import {Purchase} from '../../models/purchase.model';
 import {PurchaseProvider} from '../../providers/purchase/purchase.provider';
+import {Screening} from '../../models/screening.model';
+import {Film} from '../../models/film.model';
+import {Ticket} from '../../models/ticket.model';
 
 @IonicPage()
 @Component({
@@ -20,49 +23,44 @@ import {PurchaseProvider} from '../../providers/purchase/purchase.provider';
 })
 export class PaymentPage {
 
+    scelta : string = "acquisto";
+    qrcode : string = "";
+    
     paymentsPP: Array<PaymentPP> = [];
     paymentsCC: Array<PaymentCC> = [];
-        
-    seats: Array<Seat> = [];
-    purchases: Array<Purchase> = [];
-        
-    pushPage: any;
+       
     listofpayments: string ="";
-        
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public _provider: PurchaseProvider, private storage: Storage) {
+    email: string = "";
     
-    this.pushPage = CodesPage;
-        
-        this.storage.get('payments')
-        .then((value) => {
-            if(value === null)
-                this.paymentsPP = [];
-            else
-        this.paymentsPP = value;
-        });
-            
-        this.storage.get('payments')
-        .then((value) => {
-            if(value === null)
-                this.paymentsCC = [];
-            else
-        this.paymentsCC = value;
-        });
-        
-        let s1 = new Seat({id:1,number:1,row:'A'});
-        let s2 = new Seat({id:1,number:2,row:'A'});
-        let s3 = new Seat({id:1,number:3,row:'A'});
-        this.seats.push(s1);
-        this.seats.push(s2);
-        this.seats.push(s3);
-        
-        let screeningseat1 = new ScreeningSeat({s1});
-        let screeningseat2 = new ScreeningSeat({s2});
-        let screeningseat3 = new ScreeningSeat({s3});
-        //this.purchases.push(new Purchase({id:screeningseat1,mail:"alice@alice",qrcode:"hyyfhd"}));
-        //this.purchases.push(new Purchase({id:screeningseat2,mail:"nicolo@nicolo",qrcode:"hygdh"}));
-        //this.purchases.push(new Purchase({id:screeningseat3,mail:"mario@mario",qrcode:"hjdb"}));
+    purchases : Array<Purchase> = [];  
+    film : Film;
+    ticket : Ticket;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public sPurchase: PurchaseProvider, public storage: Storage) {
+        
+    this.storage.get('paymentsPP')
+    .then((value) => {
+        if(value === null)
+            this.paymentsPP = [];
+        else
+            this.paymentsPP = value;
+    });
+
+    this.storage.get('paymentsCC')
+    .then((value) => {
+        if(value === null)
+            this.paymentsCC = [];
+        else
+            this.paymentsCC = value;
+    });
+          
+    this.film = this.navParams.get('film');
+    this.purchases = this.navParams.get('purchases');
+        
+    var year = "2017";
+    var date = "03/11" + year;
+    var newdate = date.split("/").reverse().join("-");
+    
   }
        
   ionViewDidLoad() {
@@ -79,7 +77,8 @@ export class PaymentPage {
         },
         {
           name: "password",
-          placeholder: 'Password'
+          placeholder: 'Password',
+          type:'password'
         },
       ],
       buttons: [
@@ -109,21 +108,43 @@ export class PaymentPage {
   }
   
   savePayment(){
-    let p = this.getPay(this.listofpayments);
-    console.log(p.email);
-    for(let s of this.seats){
-      let purchase = new Purchase({id:new ScreeningSeat({seat:s}), mail:p.email, qrcode:""});
-      //console.log(purchase);
-      this.purchases.push(purchase);
-      //console.log(this.purchases);
-    }
-    this._provider.savePurchase(this.purchases);
+        this.sPurchase._checkPurchases(this.purchases).then(result1 => 
+        {
+            if (result1 == false) {
+                this.purchasesNotValid();
+                return false;
+            }
+            else {
+        this.sPurchase._savePurchases(this.purchases)
+                    .then(value => {
+                    this.qrcode = value;
+                    let s : string ="";
+                    let t : Ticket;
+                    let tickets: Array<Ticket> = [];
+                    this.storage.get('tickets').then((value) => {
+                        if (value === null)
+                            tickets = [];
+                        else
+                            tickets = value;
+                        for (let purchase of this.purchases){
+                            s = s+purchase.id.seat.number+purchase.id.seat.row+", "; 
+                        }
+                        t = new Ticket ({title:this.film.title,poster:this.film.poster,seat:s,day:this.purchases[0].id.screening.day,hour:this.purchases[0].id.screening.hour,qrcode:this.qrcode,ispurchased:true});
+                        tickets.push(t);
+                        this.storage.set('tickets',tickets);
+                        let acquistato = this.scelta;
+                        let qr = this.qrcode;
+                        this.navCtrl.push(CodesPage, {qr, acquistato});
+                    });
+                });
+            }
+        });
   }
   
   savePaymentPP(e: string, p: string) {
         let paymn= new PaymentPP({email:e,password:p});
         this.paymentsPP.push(paymn);
-        this.storage.set('payments',this.paymentsPP);
+        this.storage.set('paymentsPP',this.paymentsPP);
   }
         
    deletePaymentPP(pay: PaymentPP, sliding: ItemSliding) {
@@ -184,7 +205,7 @@ export class PaymentPage {
     savePaymentCC(c: string, n: string) {
         let paymnt= new PaymentCC({carta:c,numero:n});
         this.paymentsCC.push(paymnt);
-        this.storage.set('payments',this.paymentsCC);
+        this.storage.set('paymentsCC',this.paymentsCC);
     }
         
     deletePaymentCC(pay: PaymentCC, sliding: ItemSliding) {
@@ -197,10 +218,17 @@ export class PaymentPage {
         this.storage.set('payments', this.paymentsCC);
    }
         
-    disabled(){
+    disabled(mail: string){
         let accept = document.getElementById('bottone');
         accept.removeAttribute('disabled');
-        
+        this.email = mail;
         }
    
+    purchasesNotValid() {
+        this.alertCtrl.create({
+            title: 'Attenzione',
+            subTitle: 'I posti scelti sono gia occupati. Selezionane di nuovi nella mappa della sala.',
+            buttons: ['OK']
+            }) .present();
+        }
 }

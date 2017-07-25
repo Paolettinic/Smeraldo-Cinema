@@ -23,4 +23,12 @@ public interface BookingRepository  extends JpaRepository<Booking, Long> {
     @Query(value = "SELECT * FROM bookings WHERE screening_id = :id",nativeQuery = true)
     List<Booking> findByIdScreening (@Param("id")Long screening_id);
     
+    /**
+     * Restituisce la lista di prenotazioni per un posto
+     * @param seat_id
+     * @return lista di prenotazioni
+     */
+    @Query(value= "SELECT * FROM bookings WHERE seat_id = :id",nativeQuery = true)
+    List<Booking> findByIdSeat (@Param("id")Long seat_id);
+    
 }
