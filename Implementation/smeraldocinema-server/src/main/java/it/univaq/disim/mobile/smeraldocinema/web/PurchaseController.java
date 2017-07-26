@@ -23,7 +23,8 @@ public class PurchaseController {
     
     @PostMapping("/create")
     public String createPurchases (@RequestBody List<Purchase> purchases) {
-       return service.createPurchases(purchases);
+       String s = service.createPurchases(purchases);
+       return "{\"text\":\""+s+"\"}";
     }
     
     @PostMapping("/check")

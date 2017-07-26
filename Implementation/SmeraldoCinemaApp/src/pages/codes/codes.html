@@ -1,7 +1,7 @@
 <ion-content padding >
     <div [ngSwitch]="scelta">
         <ion-card  *ngSwitchCase="'prenotazione'" color='white' class='justify margin_top'>
-            <ion-card-header color='white'>
+            <ion-card-header color='black'>
                 Questo è il tuo codice di prenotazione
             </ion-card-header>
             <ion-card-content>
@@ -11,12 +11,11 @@
         </ion-card>
 
         <ion-card *ngSwitchCase="'acquisto'" color='white' class='justify margin_top'>
-            <ion-card-header color='white'>
+            <ion-card-header color='black'>
                 Questo è il tuo codice di acquisto
             </ion-card-header>
             <ion-card-content>
-                <!--<h1 class='color center_text'><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"></h1>-->
-		<h1 class="color center_text">{{qrcode}}</h1>
+                <h1 class='color center_text'><img src="{{qrcode}}"></h1>-->
                 Presenta il qr-code direttamente all'ingresso in sala saltando la fila al botteghino.
             </ion-card-content>
         </ion-card>

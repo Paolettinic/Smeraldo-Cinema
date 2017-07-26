@@ -17,6 +17,6 @@ public class Utility {
     }
 
     public static String generateQrCode() {
-        return "trolol";
+        return "https://upload.wikimedia.org/wikipedia/commons/7/70/QR_URL_itmwiki_Main_Page.png";
     }
 }

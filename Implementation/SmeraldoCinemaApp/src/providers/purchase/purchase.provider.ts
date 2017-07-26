@@ -10,7 +10,7 @@ import {Purchase} from '../../models/purchase.model';
 export class PurchaseProvider {
 
     //private _purchases: Array<Purchase> = null;
-
+    private _s : any;
     constructor(private _http: Http) {
         console.log('Hello PurchaseProvider Provider');
     }
@@ -18,12 +18,14 @@ export class PurchaseProvider {
     //Salvataggio dei purchases sul server
     public _savePurchases(purchases: Array<Purchase>): Promise<string>{
       return this._http.post('api/purchases/create', purchases)
-	.toPromise()
-	.then(
-	  res=> res.json().data as string
-	)
-	.catch(() => {
-	});
+	  .toPromise()
+	  .then((res : Response) => {
+	    this._s = res.json();
+	    return this._s.text;
+	  })
+	  .catch((error) => {
+	    console.log(error);
+	  });
     }
         
    //Controllo del purchase prima del salvataggio

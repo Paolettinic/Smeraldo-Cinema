@@ -25,7 +25,7 @@ public class BookingController {
       
       String s = service.createBookings(bookings);
       System.out.println(s);
-      return "{\"text\":\"hello\"}";
+      return "{\"text\":\""+s+"\"}";
     }
     
     @PostMapping("/check")

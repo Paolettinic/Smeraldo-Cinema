@@ -245,8 +245,7 @@ export class SeatsPage {
 	else{
 	  this.sBooking.saveBookings(bookings).then(value =>{
 	    let code = value;
-	    console.log(code);
-	    /*let scelta = "prenotazione";
+	    let scelta = "prenotazione";
 	    let s : string ="";
 	    let t : Ticket;
 	    let tickets: Array<Ticket> = [];
@@ -263,7 +262,7 @@ export class SeatsPage {
 	      this.storage.set('tickets',tickets);
 	      let acquistato = scelta;
 	    this.navCtrl.push(CodesPage, {code, acquistato});
-	    });*/
+	    });
 	  });
 	}
       });

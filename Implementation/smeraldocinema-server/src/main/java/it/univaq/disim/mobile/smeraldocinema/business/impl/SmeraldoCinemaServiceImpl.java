@@ -192,8 +192,7 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     
     @Override
     public String createBookings(List<Booking> bookings) {
-        //String code = Utility.generateCode();
-        String code = "was";
+        String code = Utility.generateCode();
         for (int i = 0; i < bookings.size() ;i++) {
             bookings.get(i).setCode(code);
             bookingRepository.save(bookings.get(i));
