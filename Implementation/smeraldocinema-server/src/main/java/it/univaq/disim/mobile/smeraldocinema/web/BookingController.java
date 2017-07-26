@@ -21,9 +21,11 @@ public class BookingController {
     private SmeraldoCinemaService service;
     
     @PostMapping("/create")
-    public boolean createBookings (@RequestBody List<Booking> bookings) {
-        service.createBookings(bookings);
-        return true;
+    public String createBookings (@RequestBody List<Booking> bookings) {
+      
+      String s = service.createBookings(bookings);
+      System.out.println(s);
+      return "{\"text\":\"hello\"}";
     }
     
     @PostMapping("/check")

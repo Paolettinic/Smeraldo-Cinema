@@ -14,18 +14,16 @@ export class SeatProvider {
 
   private _purchasedseats: Array<Seat> = null;
   private _bookedseats: Array<Seat> = null;
-  private _screening: number = 1;
+  private _seat: Seat = null;
   constructor(private _http: Http) {
     console.log('Hello SeatProvider Provider');
   }
 
-  getPurchasedSeats(): Promise < Array<Seat> > {
+  getPurchasedSeats(screen : number): Promise < Array<Seat> > {
     
     return new Promise((resolve) => {
-      
-      if (this._purchasedseats === null) {
 	this._purchasedseats = [];
-	this._http.get('api/purchases/1').toPromise()
+	this._http.get('api/purchases/'+screen).toPromise()
 	  .then((res: Response) => {
 	    const purchases = res.json() as Array<Purchase>;
 	    for (let purchase of purchases) {
@@ -34,19 +32,14 @@ export class SeatProvider {
 	    resolve(this._purchasedseats);
 	  })
 	  .catch(() => resolve(this._purchasedseats));
-      } else {
-	resolve(this._purchasedseats);
-      }
     });
   }
   
-  getBookedSeats(): Promise < Array<Seat> > {
+  getBookedSeats(screen : number): Promise < Array<Seat> > {
     
     return new Promise((resolve) => {
-      
-      if (this._bookedseats === null) {
 	this._bookedseats = [];
-	this._http.get('api/bookings/4').toPromise()
+	this._http.get('api/bookings/'+screen).toPromise()
 	  .then((res: Response) => {
 	    const bookings = res.json() as Array<Booking>;
 	    for (let booking of bookings) {
@@ -55,10 +48,18 @@ export class SeatProvider {
 	    resolve(this._bookedseats);
 	  })
 	  .catch(() => resolve(this._bookedseats));
-      } else {
-	resolve(this._bookedseats);
-      }
     });
-
+  }
+  
+  getSeatByRowColTheater(row : string, col: string, theater: number): Promise<Seat>{
+    return new Promise((resolve) => {
+	this._http.get('api/seats/'+row+'/'+col+'/'+theater).toPromise()
+	  .then((res: Response) => {
+	    const s = res.json() as Seat;
+	    this._seat = s;
+	    resolve(this._seat);
+	  })
+	  .catch(() => resolve(this._seat));
+    });
   }
 }

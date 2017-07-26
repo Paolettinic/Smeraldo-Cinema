@@ -14,12 +14,14 @@ export class CodesPage {
     
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   
-  //this.qrcode = this.navParams.get('qrcode');
- // this.code = this.navParams.get('code');
+  this.qrcode = this.navParams.get('qrcode');
+  this.code = this.navParams.get('code');
   this.scelta = this.navParams.get('acquistato');
   //console.log(this.qrcode);
   //console.log(this.code);
   console.log(this.scelta);
+  console.log(this.qrcode);
+  console.log(this.code);
   }
 
   ionViewDidLoad() {

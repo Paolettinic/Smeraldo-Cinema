@@ -1,13 +1,13 @@
 export class Ticket {
 
-public title: string = "Titanic";
-public day: string = "25/85";
-public hour: string = "13:13";
-public seat : string = "1A";
-public poster: string = "sedrffff";
+public title: string = "";
+public day: string = "";
+public hour: string = "";
+public seat : string = "";
+public poster: string = "";
 public ispurchased: boolean= false;
-public qrcode: string = "sedfe";
-public code: string = "erfrdf";
+public qrcode: string = "";
+public code: string = "";
 
 constructor(obj?: any) {
         this.set(obj);

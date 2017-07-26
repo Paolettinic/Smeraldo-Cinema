@@ -17,13 +17,13 @@ export class PurchaseProvider {
 
     //Salvataggio dei purchases sul server
     public _savePurchases(purchases: Array<Purchase>): Promise<string>{
-         return this._http.post('api/purchases/create', purchases)
-                .toPromise()
-                .then(
-                    res=> res.json().data as string
-                )
-                .catch(() => {
-                });
+      return this._http.post('api/purchases/create', purchases)
+	.toPromise()
+	.then(
+	  res=> res.json().data as string
+	)
+	.catch(() => {
+	});
     }
         
    //Controllo del purchase prima del salvataggio

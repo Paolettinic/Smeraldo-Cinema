@@ -9,7 +9,7 @@
   <ion-navbar color="dark">
     <ion-title>Selezione dei posti</ion-title>
     <ion-buttons end>
-      <button id="bottone" [navPush]="pushPage" (click)="doPurchaseBooking()" disabled ion-button icon-only>
+      <button id="bottone" (click)="doPurchaseBooking()" disabled ion-button icon-only>
 	<ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-buttons>
@@ -21,12 +21,12 @@
 <ion-content padding>
   <ion-grid>
     <ion-row class="personal_md">
-      <ion-col col-2 *ngFor="let item of days">
-	<button ion-button class="date_hour" small full color="secondary">{{item}}</button>
+      <ion-col col-2 *ngFor="let day of days">
+	<button ion-button class="date_hour" small full color="light_grey" id="p{{day}}" value="{{day}}" (click)='changehours(day);'>{{day}}</button>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-3 *ngFor="let item of times" text-center><button ion-button small full color="secondary">{{item}}</button></ion-col>
+      <ion-col col-3 *ngFor="let hour of hours; let first = first" ><button ion-button small full [class.primary]="first" (click)='selectScreeningByDateHour(selectedDay,hour,true);' color="light_grey" id="p{{hour}}" >{{hour}}</button></ion-col>
     </ion-row>
     <ion-row [ngSwitch]="sala">
       <ion-col col-12 class="theater" *ngSwitchCase="1">

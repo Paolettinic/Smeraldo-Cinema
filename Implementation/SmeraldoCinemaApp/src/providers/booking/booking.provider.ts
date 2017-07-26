@@ -10,7 +10,7 @@ import {Booking} from '../../models/booking.model';
 export class BookingProvider {
 
 //private _bookings: Array<Booking> = null;
-    
+    private _s : any;
     constructor(private _http: Http) {
         console.log('Hello BookingProvider Provider');
     }
@@ -18,22 +18,23 @@ export class BookingProvider {
     /**
      * Salva un booking sul server
      */
-    public _saveBookings(bookings: Array<Booking>): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            this._http.post('api/bookings/create', bookings).toPromise().then((res: Response) => {
-                    const json = res.json() as boolean;
-                    resolve(json);
-                })
-                .catch(() => {
-                    reject();
-                });
-        });
+     saveBookings(bookings: Array<Booking>): Promise<string> {
+       
+      return this._http.post('api/bookings/create', bookings)
+	  .toPromise()
+	  .then((res : Response) => {
+	    this._s = res.json();
+	    return this._s.text;
+	  })
+	  .catch((error) => {
+	    console.log(error);
+	  });
     }
-         
+    
     /**
      * Controllo sul booking
      */    
-    public _checkBookings(bookings: Array<Booking>): Promise<boolean> {
+     _checkBookings(bookings: Array<Booking>): Promise<boolean> {
         return new Promise((resolve, reject) => {
             this._http.post('api/bookings/check', bookings).toPromise().then((res: Response) => {
                     const json = res.json() as boolean;

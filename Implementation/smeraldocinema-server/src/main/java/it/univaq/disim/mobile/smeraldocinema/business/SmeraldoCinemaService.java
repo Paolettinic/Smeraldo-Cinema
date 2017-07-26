@@ -4,6 +4,8 @@ import it.univaq.disim.mobile.smeraldocinema.business.domain.Booking;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Film;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Purchase;
 import it.univaq.disim.mobile.smeraldocinema.business.domain.Screening;
+import it.univaq.disim.mobile.smeraldocinema.business.domain.Seat;
+
 import java.util.List;
 
 public interface SmeraldoCinemaService {
@@ -22,13 +24,15 @@ public interface SmeraldoCinemaService {
     
     String createPurchases(List<Purchase> purchases);
     
-    boolean createBookings(List<Booking> bookings);
+    String createBookings(List<Booking> bookings);
     
     boolean checkPurchases(List<Purchase> purchases);
     
     boolean checkBookings(List<Booking> bookings);
 
     List<Screening> findAllScreeningsByPkFilm (Long id);
+    
+    Seat findByRowNumberTheater(String row, String num, Long the);
     
     void cleanBookings ();
     

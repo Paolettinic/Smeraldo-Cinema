@@ -118,6 +118,7 @@ export class PaymentPage {
         this.sPurchase._savePurchases(this.purchases)
                     .then(value => {
                     this.qrcode = value;
+		    console.log(value);
                     let s : string ="";
                     let t : Ticket;
                     let tickets: Array<Ticket> = [];
@@ -133,8 +134,8 @@ export class PaymentPage {
                         tickets.push(t);
                         this.storage.set('tickets',tickets);
                         let acquistato = this.scelta;
-                        let qr = this.qrcode;
-                        this.navCtrl.push(CodesPage, {qr, acquistato});
+                        let qrcode = this.qrcode;
+                        this.navCtrl.push(CodesPage, {qrcode, acquistato});
                     });
                 });
             }
@@ -219,8 +220,9 @@ export class PaymentPage {
    }
         
     disabled(mail: string){
-        let accept = document.getElementById('bottone');
+        let accept = document.getElementById('button_payment');
         accept.removeAttribute('disabled');
+	console.log(accept);
         this.email = mail;
         }
    

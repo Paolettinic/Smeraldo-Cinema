@@ -186,13 +186,19 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     }
     
     @Override
-    public boolean createBookings(List<Booking> bookings) {
-        String code = Utility.generateCode();
+      public Seat findByRowNumberTheater(String row, String col, Long the){
+       return seatRepository.findByRowNumberTheater(row, col, the);
+    }
+    
+    @Override
+    public String createBookings(List<Booking> bookings) {
+        //String code = Utility.generateCode();
+        String code = "was";
         for (int i = 0; i < bookings.size() ;i++) {
             bookings.get(i).setCode(code);
             bookingRepository.save(bookings.get(i));
         }
-        return true;
+        return code;
     }
     
     @Override

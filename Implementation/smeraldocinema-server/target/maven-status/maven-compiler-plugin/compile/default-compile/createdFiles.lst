@@ -14,6 +14,7 @@ it\univaq\disim\mobile\smeraldocinema\business\domain\Film.class
 it\univaq\disim\mobile\smeraldocinema\business\domain\Booking.class
 it\univaq\disim\mobile\smeraldocinema\web\PurchaseController.class
 it\univaq\disim\mobile\smeraldocinema\business\impl\BookingRepository.class
+it\univaq\disim\mobile\smeraldocinema\web\SeatController.class
 it\univaq\disim\mobile\smeraldocinema\business\impl\ScreeningRepository.class
 it\univaq\disim\mobile\smeraldocinema\business\domain\Screening.class
 it\univaq\disim\mobile\smeraldocinema\business\domain\Theater.class
