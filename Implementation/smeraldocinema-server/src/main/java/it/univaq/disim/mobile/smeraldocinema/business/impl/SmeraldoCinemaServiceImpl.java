@@ -79,7 +79,7 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
                     //Controllo se la proiezione non è già avvenuta
                     if((nowfrmhhmm.compareTo(scrfrmhhmm)) > 0) {
                         dailyscreenings.remove(screenings.get(j));
-                    }   
+                    }
                 }
             }
             //Se oggi il film non ha proiezioni, lo rimuovo
@@ -96,9 +96,10 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     @Override
     public List<Film> findAllWeeklyFilms() {
 
-        //Creo la data odierna anche nel formato yyyy-MM-dd
+        //Creo la data odierna anche nel formato yyyy-MM-dd e HH:mm
         Date now = new Date();
         String nowfrm = new SimpleDateFormat("yyyy-MM-dd").format(now);
+        String nowfrmhhmm = new SimpleDateFormat("HH:mm").format(now);
 
         //Recupero i film con la data minore rispetto a quella odierna 
         List<Film> films = filmRepository.findByReleaseDateBefore(now);
@@ -119,24 +120,26 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
             List<Screening> screenings = film.getScreenings();
 
             //Creo una list dalla quale eliminerò, nel caso, le proiezioni
-            List<Screening> dailyscreenings = new ArrayList<>(screenings);
+            List<Screening> weeklyscreenings = new ArrayList<>(screenings);
 
             int nscreenings = screenings.size();
             for (int j = 0; j < nscreenings; j++) {
-                //Trasformo la data della proiezione corrente in una strina
+                //Trasformo la data della proiezione corrente in una stringa
                 String scrfrm = new SimpleDateFormat("yyyy-MM-dd").format(screenings.get(j).getDay());
-                if ((days.contains(scrfrm)) || (nowfrm.compareTo(scrfrm)) > 0) {
+                //Prendo l'ora dello spettacolo
+                String scrfrmhhmm = screenings.get(j).getHour();
+                if ((days.contains(scrfrm)) || (nowfrm.compareTo(scrfrm)) > 0 || nowfrmhhmm.compareTo(scrfrmhhmm) > 0) {
                     //Rimuovo la proiezione non giornaliera o già avvenuta
-                    dailyscreenings.remove(screenings.get(j));
+                    weeklyscreenings.remove(screenings.get(j));
                 } else {
                     days.add(scrfrm);
                 }
             }
             //Se oggi il film non ha proiezioni, lo rimuovo
-            if (dailyscreenings.isEmpty()) {
+            if (weeklyscreenings.isEmpty()) {
                 weeklyfilms.remove(film);
             } else { //Setto le proiezioni odierne
-                film.setScreenings(dailyscreenings);
+                film.setScreenings(weeklyscreenings);
             }
         }
         return weeklyfilms;
@@ -152,9 +155,10 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
     @Override
     public Film findFilm(Long id) {
         
-        //Creo la data odierna anche nel formato yyyy-MM-dd
+        //Creo la data odierna anche nel formato yyyy-MM-dd e HH:mm
         Date now = new Date();
         String nowfrm = new SimpleDateFormat("yyyy-MM-dd").format(now);
+        String nowfrmhhmm = new SimpleDateFormat("HH:mm").format(now);
 
         //Recupero il film
         Film film = filmRepository.findById(id);
@@ -165,7 +169,8 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
         for (int i = 0; i < nscreenings; i++) {
             //Trasformo la data della proiezione corrente in una strina
             String scrfrm = new SimpleDateFormat("yyyy-MM-dd").format(screenings.get(i).getDay());
-            if (nowfrm.compareTo(scrfrm) > 0) {
+            String scrfrmhhmm = screenings.get(i).getHour();
+            if (nowfrm.compareTo(scrfrm) > 0 || nowfrmhhmm.compareTo(scrfrmhhmm) > 0) {
                 //Rimuovo la proiezione non giornaliera o già avvenuta
                 newscreenings.remove(screenings.get(i));
             }
@@ -229,7 +234,7 @@ public class SmeraldoCinemaServiceImpl implements SmeraldoCinemaService {
         }
         return true;
     }
-    
+
     @Override
     public boolean checkBookings(List<Booking> bookings) {
         for (Booking booking : bookings) {

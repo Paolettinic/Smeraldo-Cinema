@@ -1,41 +1,51 @@
-<!--
-  Generated template for the SeatsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar color="dark">
-    <ion-title>Selezione dei posti</ion-title>
-    <ion-buttons end>
-      <button id="bottone" (click)="doPurchaseBooking()" disabled ion-button icon-only>
-	<ion-icon name="checkmark"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-
+    
+    <ion-navbar color="dark">
+        <ion-title>Selezione dei posti</ion-title>
+        <ion-buttons end>
+            <button id="bottone" (click)="doPurchaseBooking()" disabled ion-button icon-only>
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    
 </ion-header>
 
 
-<ion-content padding>
-  <ion-grid>
-    <ion-row class="personal_md">
-      <ion-col col-2 *ngFor="let day of days">
-	<button ion-button class="date_hour" small full color="light_grey" id="p{{day}}" value="{{day}}" (click)='changehours(day);'>{{day}}</button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-3 *ngFor="let hour of hours; let first = first" ><button ion-button small full [class.primary]="first" (click)='selectScreeningByDateHour(selectedDay,hour,true);' color="light_grey" id="p{{hour}}" >{{hour}}</button></ion-col>
-    </ion-row>
-    <ion-row [ngSwitch]="sala">
-      <ion-col col-12 class="theater" *ngSwitchCase="1">
-	<ion-row><ion-col col-12><p class="centred" >SCHERMO</p></ion-col></ion-row>
-        <ion-row *ngFor="let row of rows">
-	  <ion-col col-1 *ngFor="let col of cols"><button class="seat" id="{{row}}{{col}}" value="{{row}}{{col}}" (click)="selectSeat(row,col)" ion-button small full> </button></ion-col>
-	</ion-row>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+<ion-content>
+    <ion-grid>
+        
+        <ion-row class="personal_md">
+            <ion-col col-2 class="no_padding_top_bottom" text-center *ngFor="let day of days">
+                     <button ion-button class="date_hour" small full color="light_grey" id="p{{day}}" value="{{day}}" (click)='changehours(day);'>{{day}}</button>
+            </ion-col>
+        </ion-row>
+        
+        <ion-row>
+            <ion-col col-3 class="no_padding_top_bottom" text-center *ngFor="let hour of hours; let first = first">
+                     <button ion-button small full [class.primary]="first" (click)='selectScreeningByDateHour(selectedDay,hour,true);' color="light_grey" id="p{{hour}}" >{{hour}}</button>
+            </ion-col>
+        </ion-row>
+        
+        <ion-row [ngSwitch]="sala">
+            <ion-col col-12 class="theater" *ngSwitchCase="1">
+                <ion-row><ion-col col-12><p class="centred" >SCHERMO</p></ion-col></ion-row>
+                <ion-row *ngFor="let row of rows">
+                    <ion-col col-1 *ngFor="let col of cols"><button class="seat" id="{{row}}{{col}}" value="{{row}}{{col}}" (click)="selectSeat(row,col)" ion-button small full> </button></ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+        
+    </ion-grid>
+    
+    <ion-card color='light_dark'>
+        <ion-card-content>
+            ROSSO: posto acquistato<br>
+            ARANCIONE: posto prenotato<br>
+            GRIGIO: posto selezionabile<br>
+            VERDE: posto selezionato<br>
+            Numero massimo di posti selezionabili: 20
+        </ion-card-content>
+    </ion-card>
+    
 </ion-content>

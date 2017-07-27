@@ -18,8 +18,8 @@ import {Ticket} from '../../models/ticket.model';
 
 @IonicPage()
 @Component({
-  selector: 'page-payment',
-  templateUrl: 'payment.html',
+    selector: 'page-payment',
+    templateUrl: 'payment.html',
 })
 export class PaymentPage {
 
@@ -36,78 +36,78 @@ export class PaymentPage {
     film : Film;
     ticket : Ticket;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public sPurchase: PurchaseProvider, public storage: Storage) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public sPurchase: PurchaseProvider, public storage: Storage) {
         
-    this.storage.get('paymentsPP')
-    .then((value) => {
-        if(value === null)
-            this.paymentsPP = [];
-        else
-            this.paymentsPP = value;
-    });
+        this.storage.get('paymentsPP')
+                .then((value) => {
+                    if(value === null)
+                this.paymentsPP = [];
+            else
+                this.paymentsPP = value;
+        });
 
-    this.storage.get('paymentsCC')
-    .then((value) => {
-        if(value === null)
-            this.paymentsCC = [];
-        else
-            this.paymentsCC = value;
-    });
+        this.storage.get('paymentsCC')
+                .then((value) => {
+                    if(value === null)
+                this.paymentsCC = [];
+            else
+                this.paymentsCC = value;
+        });
           
-    this.film = this.navParams.get('film');
-    this.purchases = this.navParams.get('purchases');
+        this.film = this.navParams.get('film');
+        this.purchases = this.navParams.get('purchases');
         
-    var year = "2017";
-    var date = "03/11" + year;
-    var newdate = date.split("/").reverse().join("-");
+        var year = "2017";
+        var date = "03/11" + year;
+        var newdate = date.split("/").reverse().join("-");
     
-  }
-       
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PaymentPage');
-  }
-  
-  popupPP() {
-    this.alertCtrl.create({
-    title: 'Inserisci i dati',
-      inputs: [
-        {
-          name: "email",
-          placeholder: 'Indirizzo email'
-        },
-        {
-          name: "password",
-          placeholder: 'Password',
-          type:'password'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancella',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Salva',
-          handler: data => {
-        if(data.email =="" || data.password==""){
-            return false;}
-        else
-            this.savePaymentPP(data.email,data.password);
-          }
-        }
-      ]
-    }).present();
-  }
-  
-  getPay(pay : string){
-    for(let p of this.paymentsPP){
-      if(p.email === pay) return p;
     }
-  }
+       
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad PaymentPage');
+    }
   
-  savePayment(){
+    popupPP() {
+        this.alertCtrl.create({
+            title: 'Inserisci i dati',
+            inputs: [
+                {
+                    name: "email",
+                    placeholder: 'Indirizzo email'
+                },
+                {
+                    name: "password",
+                    placeholder: 'Password',
+                    type:'password'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancella',
+                    handler: data => {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Salva',
+                    handler: data => {
+                        if(data.email =="" || data.password==""){
+                            return false;}
+                        else
+                            this.savePaymentPP(data.email,data.password);
+                    }
+                }
+            ]
+        }).present();
+    }
+  
+    getPay(pay : string){
+        for(let p of this.paymentsPP){
+            if(p.email === pay) return p;
+        }
+    }
+  
+    savePayment(){
         this.sPurchase._checkPurchases(this.purchases).then(result1 => 
         {
             if (result1 == false) {
@@ -115,9 +115,9 @@ export class PaymentPage {
                 return false;
             }
             else {
-        this.sPurchase._savePurchases(this.purchases)
-                    .then(value => {
-                    this.qrcode = value;
+                this.sPurchase._savePurchases(this.purchases)
+                        .then(value => {
+                            this.qrcode = value;
 		    console.log(value);
                     let s : string ="";
                     let t : Ticket;
@@ -125,8 +125,20 @@ export class PaymentPage {
                     this.storage.get('tickets').then((value) => {
                         if (value === null)
                             tickets = [];
-                        else
-                            tickets = value;
+                        else {
+                            let date= new Date();      
+                            let today = date.getDate() < 10 ? "0"+date.getDate() : date.getDate() ;
+                            let month = (date.getMonth() + 1) < 10 ? "0"+(date.getMonth()+1) : date.getMonth()+1 ;
+                            let hour = (date.getHours()+1) < 10 ? "0"+(date.getHours()+1) : (date.getHours()+1) ;
+                            let minute = date.getMinutes() < 10 ? "0"+date.getMinutes() : date.getMinutes() ;
+                            hour = hour+':'+minute;
+                            today = today+'/'+month;
+                            console.log(today+' '+month+' '+hour+' '+minute);
+                            for(let ticket of value){
+                              t = new Ticket(ticket);
+                              if(t.day>=today && t.hour>hour) tickets.push(t);
+                            }
+                        }
                         for (let purchase of this.purchases){
                             s = s+purchase.id.seat.number+purchase.id.seat.row+", "; 
                         }
@@ -140,68 +152,68 @@ export class PaymentPage {
                 });
             }
         });
-  }
+    }
   
-  savePaymentPP(e: string, p: string) {
+    savePaymentPP(e: string, p: string) {
         let paymn= new PaymentPP({email:e,password:p});
         this.paymentsPP.push(paymn);
         this.storage.set('paymentsPP',this.paymentsPP);
-  }
+    }
         
-   deletePaymentPP(pay: PaymentPP, sliding: ItemSliding) {
+    deletePaymentPP(pay: PaymentPP, sliding: ItemSliding) {
         sliding.close();
         this.storage.get('payments').then((value) => {this.paymentsPP = value});
         let index: number = this.paymentsPP.indexOf(pay);
-    if (index !== -1) {
-        this.paymentsPP.splice(index, 1);
-    }
-        this.storage.set('payments', this.paymentsPP);
-   }
-
-  popupCC() {
-    this.alertCtrl.create({
-    title: 'Inserisci i dati',
-      inputs: [
-        {
-          name: "carta",
-          placeholder: 'Titolare carta'
-        },
-        {
-          name: "numero",
-          placeholder: 'Numero carta'
-        },
-        {
-          name: "data",
-          placeholder: 'mm/dd'
-        },
-        {
-          name: "cvc",
-          placeholder: 'CVC'
-        },
-        {
-          name: "email",
-          placeholder: 'Indirizzo email'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancella',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Salva',
-          handler: data => {
-        if(data.carta =="" || data.numero==""){
-            return false;}
-        else
-            this.savePaymentCC(data.carta,data.numero);
-          }
+        if (index !== -1) {
+            this.paymentsPP.splice(index, 1);
         }
-      ]
-    }) .present();
-  }
+        this.storage.set('payments', this.paymentsPP);
+    }
+
+    popupCC() {
+        this.alertCtrl.create({
+            title: 'Inserisci i dati',
+            inputs: [
+                {
+                    name: "carta",
+                    placeholder: 'Titolare carta'
+                },
+                {
+                    name: "numero",
+                    placeholder: 'Numero carta'
+                },
+                {
+                    name: "data",
+                    placeholder: 'mm/dd'
+                },
+                {
+                    name: "cvc",
+                    placeholder: 'CVC'
+                },
+                {
+                    name: "email",
+                    placeholder: 'Indirizzo email'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancella',
+                    handler: data => {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Salva',
+                    handler: data => {
+                        if(data.carta =="" || data.numero==""){
+                            return false;}
+                        else
+                            this.savePaymentCC(data.carta,data.numero);
+                    }
+                }
+            ]
+        }) .present();
+    }
         
     savePaymentCC(c: string, n: string) {
         let paymnt= new PaymentCC({carta:c,numero:n});
@@ -217,20 +229,20 @@ export class PaymentPage {
             this.paymentsCC.splice(index, 1);
         }
         this.storage.set('payments', this.paymentsCC);
-   }
+    }
         
     disabled(mail: string){
         let accept = document.getElementById('button_payment');
         accept.removeAttribute('disabled');
 	console.log(accept);
         this.email = mail;
-        }
+    }
    
     purchasesNotValid() {
         this.alertCtrl.create({
             title: 'Attenzione',
             subTitle: 'I posti scelti sono gia occupati. Selezionane di nuovi nella mappa della sala.',
             buttons: ['OK']
-            }) .present();
-        }
+        }) .present();
+    }
 }

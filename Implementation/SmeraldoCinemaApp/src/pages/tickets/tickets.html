@@ -1,4 +1,4 @@
-<ion-content padding>
+<ion-content>
     <ion-list no-lines>
         <ion-item *ngFor="let ticket of tickets">
             <ion-thumbnail item-start>
@@ -12,5 +12,18 @@
             <p>{{ticket.seat}}</p>
             <button ion-button clear item-end (click)='showAlert(ticket.ispurchased, ticket.qrcode, ticket.code);'>INFO</button>
         </ion-item>
+        
+        <div padding text-justify *ngIf="tickets.length == 0">
+            <ion-card color="light_dark">
+                <ion-card-header>
+                    Attenzione!
+                </ion-card-header>
+                <ion-card-content>
+                    Nessun biglietto acquistato o prenotato. Recarsi in "Programmazione" per effettuare tale operazione.
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        
     </ion-list>
 </ion-content>

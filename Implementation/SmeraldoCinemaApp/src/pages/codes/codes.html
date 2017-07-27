@@ -2,10 +2,9 @@
     <div [ngSwitch]="scelta">
         <ion-card  *ngSwitchCase="'prenotazione'" color='white' class='justify margin_top'>
             <ion-card-header color='black'>
-                Questo è il tuo codice di prenotazione
+                <h1 class='color center_text'>{{code}}</h1>
             </ion-card-header>
             <ion-card-content>
-                <h1 class='color center_text'>{{code}}</h1>
                 Presenta il codice al botteghino per acquistare i biglietti prenotati. Ricordati di farlo entro e non oltre quindici minuti dall'inizio del film altrimenti i biglietti potranno essere acquistati da terze persone senza tener conto della prenotazione effettuata.
             </ion-card-content>
         </ion-card>

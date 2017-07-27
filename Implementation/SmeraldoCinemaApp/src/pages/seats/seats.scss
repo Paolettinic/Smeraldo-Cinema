@@ -1,55 +1,59 @@
 page-seats {
-  .primary {
-      background-color: #00755c !important;
-  }
     
-  .light_grey {
-    background-color: #878787 !important;
-  }
-  
-  .seat{
-    padding:0px;
-    width: 15px;
-    height: 15px !important;
-    margin:0 auto;
-    background: #878787
-  }
-  .theater{
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  .centred{
-    text-align: center;
-  }
-  .centred_table{
-    width: 100%;
-    max-width: 400px;
-   
-  }
-  .booked{
-    background: orangered;
-  }
-  .purchased{
-    background: red;
-  }
-  .selected{
-    background: greenyellow;
-  }
-  .border{
-     font-size: 8vw;
-    border: 5px solid;
-    border-color:rgba(0,0,0,0);
-  }
-  .date_hour{
-    height: 1.7em;
-  }
-  .personal_md{
-    [col-2]{
-      width: 14.28%;
-      max-width: 14.28%;
+    .primary {
+        background-color: #00755c !important;
     }
-    .col{
-      padding: 2px
+    
+    .light_grey {
+        background-color: #878787 !important;
     }
-  }
+    
+    .seat{
+        padding:0px;
+        width: 15px;
+        height: 15px !important;
+        margin:0 auto;
+        background: #878787
+    }
+    .theater{
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    .centred{
+        text-align: center;
+    }
+    .centred_table{
+        width: 100%;
+        max-width: 400px;
+        
+    }
+    .booked{
+        background: orangered;
+    }
+    .purchased{
+        background: red;
+    }
+    .selected{
+        background: #00755c;
+    }
+    .border{
+        font-size: 8vw;
+        border: 5px solid;
+        border-color:rgba(0,0,0,0);
+    }
+    .date_hour{
+        height: 1.7em;
+    }
+    .personal_md{
+        [col-2]{
+            width: 14.28%;
+            max-width: 14.28%;
+        }
+    }
+    
+    .no_padding_top_bottom {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+    
 }

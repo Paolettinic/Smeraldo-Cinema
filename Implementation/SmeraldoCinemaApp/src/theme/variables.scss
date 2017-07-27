@@ -30,6 +30,7 @@ $background-color:                  #303030;
 $tabs-background:                   #212121;
 $text-color:                        #FFFFFF;
 $radio-md-color-on:                 #FFFFFF;
+$alert-min-width:                   350px !important;
 
 
 // Named Color Variables
@@ -41,11 +42,11 @@ $radio-md-color-on:                 #FFFFFF;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:      #00755c,
-  dark:         #212121,
-  light_dark:   #424242,
-  light_grey:   #878787,
-  white:        #FFFFFF
+primary:      #00755c,
+dark:         #212121,
+light_dark:   #424242,
+light_grey:   #878787,
+white:        #FFFFFF
 );
 
 

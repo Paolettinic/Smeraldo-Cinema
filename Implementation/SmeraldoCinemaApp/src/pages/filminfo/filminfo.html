@@ -9,13 +9,19 @@
 <ion-content>
 
     <ion-grid *ngIf="typefilm !=  'comingsoon' ">
+        
         <ion-row class="personal_md">
-            <ion-col col-2 class="no_padding_top_bottom" *ngFor="let day of days"><button ion-button small full color="light_grey"  id="{{day}}" value="{{day}}" (click)='changehours(day);'>{{day}}</button></ion-col>
-
+            <ion-col col-2 class="no_padding_top_bottom" text-center *ngFor="let day of days">
+                <button ion-button small full color="light_grey"  id="{{day}}" value="{{day}}" (click)='changehours(day);'>{{day}}</button>
+            </ion-col>
         </ion-row>
+        
         <ion-row>
-            <ion-col col-3 class="no_padding_top_bottom" text-center *ngFor="let hour of hours"><button ion-button small full color="light_grey">{{hour}}</button></ion-col>
+            <ion-col col-3 class="no_padding_top_bottom" text-center *ngFor="let hour of hours">
+                <button ion-button small full color="light_grey">{{hour}}</button>
+            </ion-col>
         </ion-row>
+        
     </ion-grid>
 
     <ion-grid class="no_padding_top_bottom">
@@ -24,7 +30,7 @@
                 <img [src]="film.poster" class="img_film">
             </ion-col>
             <ion-col col-7>
-                <h3>{{film.title}}</h3>
+                <h3 class="film_title">{{film.title}}</h3>
                 <p class="margin_top_bottom_5">Regia: {{film.director}}</p>
                 <p class="margin_top_bottom_5">Genere: {{film.genre}}</p>
                 <p *ngIf="film.actor !=  '' " class="margin_top_bottom_5">Attori: {{film.actor}}</p>

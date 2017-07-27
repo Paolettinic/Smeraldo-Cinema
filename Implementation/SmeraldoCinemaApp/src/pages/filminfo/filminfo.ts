@@ -84,7 +84,7 @@ export class FilminfoPage {
     }
     
     changehours (id) {
-        for (var i = 0; i < this.hours.length+1; i++) {
+        for (var i = 0; i < this.days.length; i++) {
             if (this.days[i] != id) {
                 var extbutton = document.getElementById(this.days[i]);
                 extbutton.classList.remove("primary");
@@ -96,6 +96,7 @@ export class FilminfoPage {
         button.classList.add("primary");
         //Cambio il valore dell'array hours
         for (var j = 0; j < this.newscreenings.length; j++) {
+            this.hours = [];
             if (this.newscreenings[j][0] == id) {
                 for (var k = 1, y = 0; k < this.newscreenings[j].length; k++, y++) {
                     this.hours[y] = this.newscreenings[j][k];
